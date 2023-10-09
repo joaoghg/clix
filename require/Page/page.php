@@ -1,0 +1,53 @@
+<?php
+
+namespace Page;
+use Rain\Tpl;
+
+class Page
+{
+
+    private $tpl;
+    private $options;
+    private  $defaults = [
+        "header" => true,
+        "footer" => true,
+        "data" => []
+    ];
+
+    public function __construct($options = [], $tpl_dir = "/views/"){
+
+        $this->options = array_merge($this->defaults, $options);
+
+        $config = array(
+            "tpl_dir"     => $_SERVER['DOCUMENT_ROOT'].$tpl_dir,
+            "cache_dir"   => $_SERVER['DOCUMENT_ROOT']."/views-cache/",
+            "debug"       => false
+        );
+
+        Tpl::configure($config);
+        $this->tpl = new Tpl();
+
+        $this->setData($this->options["data"]);
+
+        if($this->options['header'])
+            $this->tpl->draw("header");
+    }
+
+    private function setData($data = []){
+        foreach($data as $indice => $valor){
+            $this->tpl->assign($indice, $valor);
+        }
+    }
+
+    public function setTpl($name, $data = [], $returnHTML = false){
+        $this->setData($data);
+
+        return $this->tpl->draw($name, $returnHTML);
+    }
+
+    public function __destruct(){
+        if($this->options['footer'])
+            $this->tpl->draw("footer");
+    }
+
+}

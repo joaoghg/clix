@@ -1,0 +1,15 @@
+{
+    "name": "joaoghg/ecommerce_eletronicos",
+    "authors": [
+        {
+            "name": "João Guilherme Herreira Garnica",
+            "email": "jherreiragarnica@gmail.com"
+        }
+    ],
+    "require": {
+    	"phpmailer/phpmailer":"5.2.22",
+    	"rain/raintpl":"3.0.0",
+        "slim/slim": "4.10.0",
+        "slim/psr7": "^1.6"
+    }
+}
