@@ -4,20 +4,15 @@ namespace DB;
 
 class Sql {
 
-	const HOSTNAME = "127.0.0.1";
-	const USERNAME = "root";
-	const PASSWORD = "";
-	const DBNAME = "db_ecommerce";
-
 	private $conn;
 
 	public function __construct()
 	{
 
 		$this->conn = new \PDO(
-			"mysql:dbname=".Sql::DBNAME.";host=".Sql::HOSTNAME,
-			Sql::USERNAME,
-			Sql::PASSWORD
+			"mysql:dbname=".$_ENV["DBNAME"].";host=".$_ENV["HOSTNAME"],
+            $_ENV["USERNAME"],
+            $_ENV["PASSWORD"]
 		);
 
 	}
@@ -65,5 +60,3 @@ class Sql {
 	}
 
 }
-
- ?>

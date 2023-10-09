@@ -5,8 +5,12 @@ session_start();
 require_once("vendor/autoload.php");
 require_once("require/myAutoload.php");
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 ini_set('display_errors', 0);
 
+use DB\Sql;
 use Page\PageAdmin;
 use Slim\Factory\AppFactory;
 use Page\Page;

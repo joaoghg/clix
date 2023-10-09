@@ -11,19 +11,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema db_ecommerce
+-- Schema ecommerce
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema db_ecommerce
+-- Schema ecommerce
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `db_ecommerce` DEFAULT CHARACTER SET utf8 ;
-USE `db_ecommerce` ;
+CREATE SCHEMA IF NOT EXISTS `ecommerce` DEFAULT CHARACTER SET utf8 ;
+USE `ecommerce` ;
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`pessoas`
+-- Table `ecommerce`.`pessoas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`pessoas` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`pessoas` (
   `ps_codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `ps_nome` VARCHAR(64) NOT NULL,
   `ps_email` VARCHAR(128) NULL DEFAULT NULL,
@@ -36,9 +36,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`enderecos`
+-- Table `ecommerce`.`enderecos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`enderecos` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`enderecos` (
   `end_codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `ps_codigo` INT(11) NOT NULL,
   `end_rua` VARCHAR(128) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `db_ecommerce`.`enderecos` (
   INDEX `fk_addresses_persons_idx` (`ps_codigo` ASC),
   CONSTRAINT `fk_addresses_persons`
     FOREIGN KEY (`ps_codigo`)
-    REFERENCES `db_ecommerce`.`pessoas` (`ps_codigo`)
+    REFERENCES `ecommerce`.`pessoas` (`ps_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -60,9 +60,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`usuarios`
+-- Table `ecommerce`.`usuarios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`usuarios` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`usuarios` (
   `user_codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `ps_codigo` INT(11) NOT NULL,
   `user_login` VARCHAR(64) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `db_ecommerce`.`usuarios` (
   INDEX `FK_users_persons_idx` (`ps_codigo` ASC),
   CONSTRAINT `fk_users_persons`
     FOREIGN KEY (`ps_codigo`)
-    REFERENCES `db_ecommerce`.`pessoas` (`ps_codigo`)
+    REFERENCES `ecommerce`.`pessoas` (`ps_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -81,9 +81,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`carrinhos`
+-- Table `ecommerce`.`carrinhos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`carrinhos` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`carrinhos` (
   `car_codigo` INT(11) NOT NULL,
   `car_sessao_id` VARCHAR(64) NOT NULL,
   `user_codigo` INT(11) NULL DEFAULT NULL,
@@ -95,12 +95,12 @@ CREATE TABLE IF NOT EXISTS `db_ecommerce`.`carrinhos` (
   INDEX `fk_carts_addresses_idx` (`end_codigo` ASC),
   CONSTRAINT `fk_carts_addresses`
     FOREIGN KEY (`end_codigo`)
-    REFERENCES `db_ecommerce`.`enderecos` (`end_codigo`)
+    REFERENCES `ecommerce`.`enderecos` (`end_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_carts_users`
     FOREIGN KEY (`user_codigo`)
-    REFERENCES `db_ecommerce`.`usuarios` (`user_codigo`)
+    REFERENCES `ecommerce`.`usuarios` (`user_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -108,9 +108,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`produtos`
+-- Table `ecommerce`.`produtos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`produtos` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`produtos` (
   `prd_codigo` INT(11) NOT NULL,
   `prd_descricao` VARCHAR(64) NOT NULL,
   `prd_preco` DECIMAL(10,2) NOT NULL,
@@ -126,9 +126,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`produtos_carrinho`
+-- Table `ecommerce`.`produtos_carrinho`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`produtos_carrinho` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`produtos_carrinho` (
   `carprd_codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `car_codigo` INT(11) NOT NULL,
   `prd_codigo` INT(11) NOT NULL,
@@ -138,12 +138,12 @@ CREATE TABLE IF NOT EXISTS `db_ecommerce`.`produtos_carrinho` (
   INDEX `FK_cartsproducts_products_idx` (`prd_codigo` ASC),
   CONSTRAINT `fk_cartsproducts_carts`
     FOREIGN KEY (`car_codigo`)
-    REFERENCES `db_ecommerce`.`carrinhos` (`car_codigo`)
+    REFERENCES `ecommerce`.`carrinhos` (`car_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cartsproducts_products`
     FOREIGN KEY (`prd_codigo`)
-    REFERENCES `db_ecommerce`.`produtos` (`prd_codigo`)
+    REFERENCES `ecommerce`.`produtos` (`prd_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -151,9 +151,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`categorias`
+-- Table `ecommerce`.`categorias`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`categorias` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`categorias` (
   `cat_codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `cat_descricao` VARCHAR(32) NOT NULL,
   `cat_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -163,9 +163,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`pedido_status`
+-- Table `ecommerce`.`pedido_status`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`pedido_status` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`pedido_status` (
   `pedst_codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `pedst_descricao` VARCHAR(32) NOT NULL,
   `pedst_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -175,9 +175,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`pedidos`
+-- Table `ecommerce`.`pedidos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`pedidos` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`pedidos` (
   `ped_codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `car_codigo` INT(11) NOT NULL,
   `user_codigo` INT(11) NOT NULL,
@@ -190,17 +190,17 @@ CREATE TABLE IF NOT EXISTS `db_ecommerce`.`pedidos` (
   INDEX `fk_orders_ordersstatus_idx` (`ped_status` ASC),
   CONSTRAINT `fk_orders_carts`
     FOREIGN KEY (`car_codigo`)
-    REFERENCES `db_ecommerce`.`carrinhos` (`car_codigo`)
+    REFERENCES `ecommerce`.`carrinhos` (`car_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_orders_ordersstatus`
     FOREIGN KEY (`ped_status`)
-    REFERENCES `db_ecommerce`.`pedido_status` (`pedst_codigo`)
+    REFERENCES `ecommerce`.`pedido_status` (`pedst_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_orders_users`
     FOREIGN KEY (`user_codigo`)
-    REFERENCES `db_ecommerce`.`usuarios` (`user_codigo`)
+    REFERENCES `ecommerce`.`usuarios` (`user_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -208,21 +208,21 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`produto_categoria`
+-- Table `ecommerce`.`produto_categoria`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`produto_categoria` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`produto_categoria` (
   `cat_codigo` INT(11) NOT NULL,
   `prd_codigo` INT(11) NOT NULL,
   PRIMARY KEY (`cat_codigo`, `prd_codigo`),
   INDEX `fk_productscategories_products_idx` (`prd_codigo` ASC),
   CONSTRAINT `fk_productscategories_categories`
     FOREIGN KEY (`cat_codigo`)
-    REFERENCES `db_ecommerce`.`categorias` (`cat_codigo`)
+    REFERENCES `ecommerce`.`categorias` (`cat_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_productscategories_products`
     FOREIGN KEY (`prd_codigo`)
-    REFERENCES `db_ecommerce`.`produtos` (`prd_codigo`)
+    REFERENCES `ecommerce`.`produtos` (`prd_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -230,9 +230,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`log_usuarios`
+-- Table `ecommerce`.`log_usuarios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`log_usuarios` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`log_usuarios` (
   `userlog_codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `user_codigo` INT(11) NOT NULL,
   `userlog_descricao` VARCHAR(128) NOT NULL,
@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `db_ecommerce`.`log_usuarios` (
   INDEX `fk_userslogs_users_idx` (`user_codigo` ASC),
   CONSTRAINT `fk_userslogs_users`
     FOREIGN KEY (`user_codigo`)
-    REFERENCES `db_ecommerce`.`usuarios` (`user_codigo`)
+    REFERENCES `ecommerce`.`usuarios` (`user_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -251,9 +251,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `db_ecommerce`.`log_recuperar_senha`
+-- Table `ecommerce`.`log_recuperar_senha`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_ecommerce`.`log_recuperar_senha` (
+CREATE TABLE IF NOT EXISTS `ecommerce`.`log_recuperar_senha` (
   `logrs_codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `user_codigo` INT(11) NOT NULL,
   `logrs_ip` VARCHAR(45) NOT NULL,
@@ -263,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `db_ecommerce`.`log_recuperar_senha` (
   INDEX `fk_userspasswordsrecoveries_users_idx` (`user_codigo` ASC),
   CONSTRAINT `fk_userspasswordsrecoveries_users`
     FOREIGN KEY (`user_codigo`)
-    REFERENCES `db_ecommerce`.`usuarios` (`user_codigo`)
+    REFERENCES `ecommerce`.`usuarios` (`user_codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
