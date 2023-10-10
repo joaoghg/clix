@@ -1,0 +1,2 @@
+Para que o projeto funcione corretamente, crie um arquivo .env na raiz do projeto preenchendo as chaves que existem no arquivo .env.example.
+Crie também na raiz do projeto uma pasta chamada views-cache, que será utilizada pelo raintTpl.
