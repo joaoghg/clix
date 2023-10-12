@@ -2,3 +2,4 @@ vendor/
 .env
 views-cache/
 .idea/
+composer.lock
