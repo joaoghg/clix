@@ -4,7 +4,12 @@
         {
             "name": "João Guilherme Herreira Garnica",
             "email": "jherreiragarnica@gmail.com"
+        },
+        {
+            "name": "Lenicio Bassan Sebastião",
+            "email": "lenicio.bs@gmail.com"
         }
+        
     ],
     "require": {
     	"phpmailer/phpmailer":"5.2.22",
