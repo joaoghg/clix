@@ -38,7 +38,7 @@
 .botao03{
     width: 100%;
     height: 50%;
-    padding: 32px;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,13 +46,12 @@
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
-    list-style-type: none;
     font-family: montserrat,sans-serif!important;
 }
 .botao04{
     width: 100%;
     height: 50%;
-    padding: 32px;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,16 +62,16 @@
     font-family: montserrat,sans-serif!important;
 }
 .botao04:hover{
-    background-color: #AF4438;
+    background-color: #001905;
 }
 .botao01:hover{
-    background-color: #fd1900;
+    background-color: #001905;
 }
 .botao02:hover{
-    background-color: #ff1900;
+    background-color: #001905; 
 }
 .botao03:hover{
-    background-color: #AF4438;
+    background-color: #001905;
 }
 
 .botao03 .dropdown-item, .botao04 .dropdown-item, .botao01 .dropdown-item,
@@ -85,3 +84,10 @@
     background: #922b1f !important;
     transition: all 0.75s;
 }
+
+.barra-de-pesquisa {
+    width: 200px;
+    height: 30px;
+}
+
+
