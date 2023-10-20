@@ -8,8 +8,11 @@
         {
             "name": "Lenicio Bassan Sebastião",
             "email": "lenicio.bs@gmail.com"
+        },
+        {
+            "name": "Thales Cunha Zaitum",
+            "email": "thalescunha57@gmail.com"
         }
-        
     ],
     "require": {
     	"phpmailer/phpmailer":"5.2.22",
