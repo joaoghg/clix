@@ -1155,6 +1155,21 @@ textarea.input {
 	Products slick
 \*----------------------------*/
 
+.products-slick {
+    margin-left: auto;
+    margin-right: auto;
+    width: 94%;
+}
+
+.products-slick .slick-next, .products-slick .slick-prev {
+    border: transparent;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    margin: 10px 0;
+    top: 43%;
+}
+
 .products-slick .slick-list {
   padding-bottom: 60px;
   margin-bottom: -60px;
