@@ -59,6 +59,8 @@ Table OF Contents
     --primary: #8A2BE2;
     --star: #FFD700;
     --medium-purple: #9370DB;
+    --dropdown-menu: #42146d;
+
 }
 
 body {
@@ -1018,7 +1020,7 @@ textarea.input {
   right: 1px;
   bottom: 1px;
   padding: 15px;
-  background: #1e1f29;
+  background:var(--dropdown-menu);
   text-align: center;
   -webkit-transform: translateY(0%);
   -ms-transform: translateY(0%);
