@@ -11,7 +11,7 @@ class Sql {
 
 		$this->conn = new \PDO(
 			"mysql:dbname=".$_ENV["DBNAME"].";host=".$_ENV["HOSTNAME"],
-            $_ENV["USERNAME"],
+            $_ENV["DBUSER"],
             $_ENV["PASSWORD"]
 		);
 

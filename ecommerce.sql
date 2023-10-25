@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`pessoas` (
   `ps_nome` VARCHAR(64) NOT NULL,
   `ps_email` VARCHAR(128) NULL DEFAULT NULL,
   `ps_contato` BIGINT(20) NULL DEFAULT NULL,
-  `ps_resgistro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ps_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ps_codigo`),
   UNIQUE INDEX `desemail_UNIQUE` (`ps_email` ASC))
 ENGINE = InnoDB
@@ -268,6 +268,10 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`log_recuperar_senha` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+--Inserindo usuário admin
+insert into pessoas (ps_nome, ps_email, ps_contato) values ('admin', 'admin@gmail.com', '1440028922')
+insert into usuarios(ps_codigo, user_login, user_senha, user_admin) values (1, 'admin', '$2y$12$N8hBTDJAc33fostLXYYrC.r1bMjjGWRS7urjAQA.V0ozP71wTyRK6', 1)
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

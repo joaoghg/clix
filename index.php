@@ -48,12 +48,12 @@ $app->post('/admin/login', function() {
 
     try{
         User::login($_POST['login'], $_POST['password']);
-    }catch(\Exception $erro){
-        die($erro->getMessage());
-    }
 
-    header("Location: /admin");
-    exit;
+        header("Location: /admin");
+    }catch(\Exception $erro){
+        echo($erro->getMessage());
+    }
+    exit();
 });
 
 $app->run();
