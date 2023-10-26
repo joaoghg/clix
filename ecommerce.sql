@@ -269,9 +269,8 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`log_recuperar_senha` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
---Inserindo usuário admin
-insert into pessoas (ps_nome, ps_email, ps_contato) values ('admin', 'admin@gmail.com', '1440028922')
-insert into usuarios(ps_codigo, user_login, user_senha, user_admin) values (1, 'admin', '$2y$12$N8hBTDJAc33fostLXYYrC.r1bMjjGWRS7urjAQA.V0ozP71wTyRK6', 1)
+insert into pessoas (ps_nome, ps_email, ps_contato) values ('admin', 'admin@gmail.com', '1440028922');
+insert into usuarios(ps_codigo, user_login, user_senha, user_admin) values (1, 'admin', '$2y$12$N8hBTDJAc33fostLXYYrC.r1bMjjGWRS7urjAQA.V0ozP71wTyRK6', 1);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

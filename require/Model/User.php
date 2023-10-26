@@ -23,7 +23,7 @@ class User extends Model
         $results = $conn->select($sql, [':login' => $login]);
 
         if(count($results) === 0){
-            throw new \Exception("Credenciais inv·lidas!");
+            throw new \Exception("Credenciais inv√°lidas!");
         }
 
         $data = $results[0];
@@ -37,7 +37,7 @@ class User extends Model
 
             return $user;
         }else{
-            throw new \Exception("Credenciais inv·lidas!");
+            throw new \Exception("Credenciais inv√°lidas!");
         }
 
     }

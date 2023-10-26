@@ -47,13 +47,20 @@ $app->get('/admin/login', function() {
 $app->post('/admin/login', function() {
 
     try{
-        User::login($_POST['login'], $_POST['password']);
+        $data = json_decode(file_get_contents('php://input'), true);
 
-        header("Location: /admin");
+        User::login($data['login'], $data['password']);
+
+        http_response_code(200);
+        $retorno['status'] = true;
     }catch(\Exception $erro){
-        echo($erro->getMessage());
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = mb_convert_encoding($erro->getMessage(), "UTF-8");
     }
-    exit();
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
 });
 
 $app->run();
