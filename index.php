@@ -83,4 +83,14 @@ $app->get('/admin/users', function (){
 
 });
 
+$app->get('/admin/users', function (){
+
+    User::verifyLogin();
+
+    $page = new PageAdmin();
+
+    $page->setTpl("users-create");
+
+});
+
 $app->run();
