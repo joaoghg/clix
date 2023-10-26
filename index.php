@@ -56,10 +56,30 @@ $app->post('/admin/login', function() {
     }catch(\Exception $erro){
         http_response_code(400);
         $retorno['status'] = false;
-        $retorno['msg'] = mb_convert_encoding($erro->getMessage(), "UTF-8");
+        $retorno['msg'] = $erro->getMessage();
     }
     header("Content-Type: application/json");
     exit(json_encode($retorno));
+
+});
+
+$app->get('/admin/logout', function (){
+
+    User::logout();
+
+    header("Location: /admin/login");
+    exit;
+});
+
+$app->get('/admin/users', function (){
+
+    User::verifyLogin();
+
+    $users = User::listAll();
+
+    $page = new PageAdmin();
+
+    $page->setTpl("users", array("users" => $users));
 
 });
 

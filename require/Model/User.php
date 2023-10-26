@@ -58,11 +58,22 @@ class User extends Model
 
     public static function logout()
     {
-
+        $_SESSION[User::SESSION] = null;
     }
 
     public static function listAll()
     {
+
+        $conn = new Sql();
+
+        $sql = "
+        SELECT *
+        FROM usuarios user
+        INNER JOIN pessoas ps ON user.ps_codigo = ps.ps_codigo
+        ORDER BY ps_nome
+        ";
+
+        return $conn->select($sql);
 
     }
 

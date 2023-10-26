@@ -29,7 +29,6 @@ async function loginAdmin(){
     }
 
     const response = await fetch(url, options)
-    console.log(response)
 
     if(response.status === 200){
         window.open('/admin', '_self')
