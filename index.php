@@ -27,6 +27,7 @@ $app->get('/', function() {
     $page->setTpl("index");
 });
 
+
 $app->get('/admin', function() {
 
     User::verifyLogin();
@@ -91,6 +92,13 @@ $app->get('/admin/users/create', function (){
 
     $page->setTpl("users-create");
 
+});
+
+$app->get('/checkout', function() {
+
+    $page = new Page();
+
+    $page->setTpl("checkout");
 });
 
 $app->run();

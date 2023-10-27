@@ -2202,3 +2202,29 @@ textarea.input {
     margin-top: 10px;
   }
 }
+/* ESTILOS CHEKOUT */
+
+.titulo-endereco {
+  align-items: center;
+  display: flex;
+}
+
+.input-endereco {
+  display: flex;
+  align-items: center;
+}
+.input-endereco svg {
+  margin-right: 5px;
+} 
+
+.input-endereco .rua {
+  width: 70%;
+}
+
+.input-endereco .numero {
+  width: 30%;
+}
+
+.cupom {
+  margin-top: 10px;
+}
