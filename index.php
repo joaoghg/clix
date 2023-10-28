@@ -94,6 +94,39 @@ $app->get('/admin/users/create', function (){
 
 });
 
+$app->post('/admin/users/create', function (){
+
+    try{
+        User::verifyLogin();
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        User::save($data['ps_nome'], $data['user_senha'], $data['ps_contato'], $data['ps_email'], $data['user_login'], $data['user_admin']);
+
+        http_response_code(200);
+        $retorno['status'] = true;
+    }catch(\Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
+});
+
+$app->get('/admin/users/{user_codigo}/delete', function (Request $request, Response $response, array $args){
+
+    User::verifyLogin();
+
+    $user_codigo = $args['user_codigo'];
+
+    User::delete($user_codigo);
+
+    header("Location: /admin/users");
+    exit();
+});
+
 $app->get('/checkout', function() {
 
     $page = new Page();

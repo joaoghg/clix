@@ -24,6 +24,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <link rel="stylesheet" href="/res/admin/dist/css/skins/skin-blue.min.css">
 
+<link rel="stylesheet" href="/res/styles/style.css">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -62,40 +64,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <h3 class="box-title">Novo Usu&aacute;rio</h3>
               </div>
               <!-- /.box-header -->
-              <!-- form start -->
-              <form role="form" action="/admin/users/create" method="post">
-                <div class="box-body">
-                  <div class="form-group">
-                    <label for="desperson">Nome</label>
-                    <input type="text" class="form-control" id="desperson" name="desperson" placeholder="Digite o nome">
-                  </div>
-                  <div class="form-group">
-                    <label for="deslogin">Login</label>
-                    <input type="text" class="form-control" id="deslogin" name="deslogin" placeholder="Digite o login">
-                  </div>
-                  <div class="form-group">
-                    <label for="nrphone">Telefone</label>
-                    <input type="tel" class="form-control" id="nrphone" name="nrphone" placeholder="Digite o telefone">
-                  </div>
-                  <div class="form-group">
-                    <label for="desemail">E-mail</label>
-                    <input type="email" class="form-control" id="desemail" name="desemail" placeholder="Digite o e-mail">
-                  </div>
-                  <div class="form-group">
-                    <label for="despassword">Senha</label>
-                    <input type="password" class="form-control" id="despassword" name="despassword" placeholder="Digite a senha">
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" name="inadmin" value="1"> Acesso de Administrador
-                    </label>
-                  </div>
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="cmp_ps_nome">Nome</label>
+                  <input type="text" class="form-control" id="cmp_ps_nome" placeholder="Digite o nome">
                 </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-success">Cadastrar</button>
+                <div class="form-group">
+                  <label for="cmp_user_login">Login</label>
+                  <input type="text" class="form-control" id="cmp_user_login" placeholder="Digite o login">
                 </div>
-              </form>
+                <div class="form-group">
+                  <label for="cmp_ps_contato">Telefone</label>
+                  <input type="text" class="form-control" id="cmp_ps_contato" onkeyup="handlePhone(event)" placeholder="Digite o telefone">
+                </div>
+                <div class="form-group">
+                  <label for="cmp_ps_email">E-mail</label>
+                  <input type="email" class="form-control" id="cmp_ps_email" placeholder="Digite o e-mail">
+                </div>
+                <div class="form-group">
+                  <label for="cmp_user_senha">Senha</label>
+                  <input type="password" class="form-control" id="cmp_user_senha" placeholder="Digite a senha">
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="cmp_user_admin" value="1"> Acesso de Administrador
+                  </label>
+                </div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <button type="button" onclick="cadastrarUsuarioAdmin()" class="btn btn-success">Cadastrar</button>
+              </div>
             </div>
           </div>
         </div>
@@ -117,6 +116,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="/res/admin/bootstrap/js/bootstrap.min.js"></script>
   <!-- AdminLTE App -->
   <script src="/res/admin/dist/js/app.min.js"></script>
+
+  <script src="/res/admin/functions.js"></script>
+  <script src="/res/scripts/functions.js"></script>
 
   <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the

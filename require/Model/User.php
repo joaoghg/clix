@@ -68,8 +68,8 @@ class User extends Model
 
         $sql = "
         SELECT *
-        FROM usuarios user
-        INNER JOIN pessoas ps ON user.ps_codigo = ps.ps_codigo
+        FROM usuarios a
+        INNER JOIN pessoas b ON a.ps_codigo = b.ps_codigo
         ORDER BY ps_nome
         ";
 
@@ -77,8 +77,42 @@ class User extends Model
 
     }
 
-    public function save()
+    public static function save($ps_nome, $user_senha, $ps_contato, $ps_email, $user_login, $user_admin = 0)
     {
+
+        $conn = new Sql();
+
+        $ps_contato = trim($ps_contato) != "" ? $ps_contato : NULL;
+        $ps_email   = trim($ps_email)   != "" ? $ps_email : NULL;
+
+        $hash_options = [
+            'cost' => 12
+        ];
+
+        $user_senha = password_hash($user_senha, PASSWORD_DEFAULT, $hash_options);
+
+        $sql = "
+            INSERT INTO pessoas
+            (ps_nome, ps_email, ps_contato)
+            VALUES 
+            (:ps_nome, :ps_email, :ps_contato);
+
+            INSERT INTO usuarios
+            (ps_codigo, user_login, user_senha, user_admin)
+            VALUES 
+            ((SELECT LAST_INSERT_ID()), :user_login, :user_senha, :user_admin);
+        ";
+
+        $dados = array(
+            ':ps_nome' => $ps_nome,
+            ':ps_email' => $ps_email,
+            ':ps_contato' => $ps_contato,
+            ':user_login' => $user_login,
+            ':user_senha' => $user_senha,
+            ':user_admin' => $user_admin
+        );
+
+        $conn->query($sql, $dados);
 
     }
 
@@ -91,7 +125,35 @@ class User extends Model
 
     }
 
-    public function delete(){
+    public static function delete($user_codigo)
+    {
+
+        $conn = new Sql();
+
+        $sql = "
+            SELECT ps_codigo
+            FROM usuarios 
+            WHERE user_codigo = :user_codigo
+        ";
+
+        $ret = $conn->select($sql, [":user_codigo" => $user_codigo]);
+
+        $ret = $ret[0];
+
+        $ps_codigo = $ret['ps_codigo'];
+
+        $sql = "
+            DELETE FROM usuarios
+            WHERE user_codigo = :user_codigo;
+
+            DELETE FROM pessoas
+            WHERE ps_codigo = :ps_codigo;
+        ";
+
+        $conn->query($sql, array(
+            ':user_codigo' => $user_codigo,
+            ':ps_codigo' => $ps_codigo
+        ));
 
     }
 
