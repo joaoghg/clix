@@ -230,6 +230,23 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `ecommerce`.`produto_imagens`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecommerce`.`produto_imagens` (
+   `img_codigo` INT(11) NOT NULL,
+   `prd_codigo` INT(11) NOT NULL,
+   `img_caminho` VARCHAR(255) NOT NULL,
+   PRIMARY KEY (img_codigo),
+   CONSTRAINT `fk_productsimages_produtos`
+     FOREIGN KEY (`prd_codigo`)
+     REFERENCES `ecommerce`.`produtos` (`prd_codigo`)
+     ON DELETE NO ACTION
+     ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `ecommerce`.`log_usuarios`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce`.`log_usuarios` (
