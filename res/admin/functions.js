@@ -41,7 +41,6 @@ async function loginAdmin(){
 
 //Cadastro de usuário
 async function cadastrarUsuarioAdmin(){
-    debugger
 
     const erro = validar_campos('cmp_ps_nome', 'cmp_user_login', 'cmp_user_senha');
 
@@ -81,6 +80,54 @@ async function cadastrarUsuarioAdmin(){
 
     if(response.status === 200){
         alert("Usuário cadastrado!")
+        window.open('/admin/users', '_self')
+    }
+    else{
+        const erro = await response.json()
+        alert(erro.msg)
+    }
+
+}
+
+async function atualizarUsuarioAdmin(user_codigo){
+
+    const erro = validar_campos('cmp_ps_nome', 'cmp_user_login');
+
+    if(erro === 1){
+        return
+    }
+
+    limpar_validacao();
+
+    const ps_nome    = document.querySelector('#cmp_ps_nome').value
+    const user_login = document.querySelector('#cmp_user_login').value
+    const ps_contato = document.querySelector('#cmp_ps_contato').value
+    const ps_email   = document.querySelector('#cmp_ps_email').value
+    const user_admin = document.querySelector('#cmp_user_admin').checked ? 1 : 0
+
+    const url = '/admin/users/update'
+
+    const data = {
+        ps_nome     : ps_nome,
+        ps_contato  : ps_contato,
+        ps_email    : ps_email,
+        user_admin  : user_admin,
+        user_login  : user_login,
+        user_codigo : user_codigo
+    }
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    const response = await fetch(url, options)
+
+    if(response.status === 200){
+        alert("Usuário Atualizado!")
         window.open('/admin/users', '_self')
     }
     else{

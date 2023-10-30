@@ -82,7 +82,7 @@ class User extends Model
 
         $conn = new Sql();
 
-        $ps_contato = trim($ps_contato) != "" ? $ps_contato : NULL;
+        $ps_contato = trim($ps_contato) != "" ? preg_replace("/[^0-9]/", "", $ps_contato) : NULL;
         $ps_email   = trim($ps_email)   != "" ? $ps_email : NULL;
 
         $hash_options = [
@@ -116,12 +116,61 @@ class User extends Model
 
     }
 
-    public function get($user_codigo)
+    public static function get($user_codigo)
     {
+
+        $conn = new Sql();
+
+        $sql = "
+            SELECT * 
+            FROM usuarios a
+            INNER JOIN pessoas b ON a.ps_codigo = b.ps_codigo
+            WHERE user_codigo = :user_codigo
+        ";
+
+        $result = $conn->select($sql, array(
+           ":user_codigo" => $user_codigo
+        ));
+
+        return $result[0];
 
     }
 
-    public function update(){
+    public static function update($user_codigo, $ps_nome, $ps_contato, $ps_email, $user_login, $user_admin)
+    {
+
+        $conn = new Sql();
+
+        $ps_contato = trim($ps_contato) != "" ? preg_replace("/[^0-9]/", "", $ps_contato) : NULL;
+        $ps_email   = trim($ps_email)   != "" ? $ps_email : NULL;
+
+        $sql = "
+            SELECT @ps_codigo := ps_codigo 
+            FROM usuarios 
+            WHERE user_codigo = :user_codigo;
+
+            UPDATE pessoas
+            SET ps_nome = :ps_nome,
+                ps_contato = :ps_contato,
+                ps_email = :ps_email
+            WHERE ps_codigo = @ps_codigo;
+
+            UPDATE usuarios
+            SET user_login = :user_login,
+                user_admin = :user_admin
+            WHERE user_codigo = :user_codigo;
+        ";
+
+        $dados = array(
+            ':ps_nome' => $ps_nome,
+            ':ps_email' => $ps_email,
+            ':ps_contato' => $ps_contato,
+            ':user_login' => $user_login,
+            ':user_admin' => $user_admin,
+            ':user_codigo' => $user_codigo
+        );
+
+        $conn->query($sql, $dados);
 
     }
 

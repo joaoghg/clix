@@ -127,6 +127,41 @@ $app->get('/admin/users/{user_codigo}/delete', function (Request $request, Respo
     exit();
 });
 
+$app->get('/admin/users/{user_codigo}', function (Request $request, Response $response, array $args){
+
+    User::verifyLogin();
+
+    $user_codigo = $args['user_codigo'];
+
+    $user = User::get($user_codigo);
+
+    $page = new PageAdmin();
+
+    $page->setTpl("users-update", ["user" => $user]);
+
+});
+
+$app->post('/admin/users/update', function (){
+
+    try{
+        User::verifyLogin();
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        User::update($data['user_codigo'], $data['ps_nome'], $data['ps_contato'], $data['ps_email'], $data['user_login'], $data['user_admin']);
+
+        http_response_code(200);
+        $retorno['status'] = true;
+    }catch(\Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
+});
+
 $app->get('/checkout', function() {
 
     $page = new Page();
