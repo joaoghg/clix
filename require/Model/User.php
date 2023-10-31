@@ -132,6 +132,8 @@ class User extends Model
            ":user_codigo" => $user_codigo
         ));
 
+        $result[0]['ps_contato'] = phoneMask($result[0]['ps_contato']);
+
         return $result[0];
 
     }

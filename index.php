@@ -2,19 +2,18 @@
 
 session_start();
 
-require_once("vendor/autoload.php");
-require_once("require/myAutoload.php");
+require_once("config.php");
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 ini_set('display_errors', 0);
 
-use DB\Sql;
 use Page\PageAdmin;
 use Slim\Factory\AppFactory;
 use Page\Page;
 use Model\User;
+use Model\Categoria;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -167,6 +166,96 @@ $app->get('/checkout', function() {
     $page = new Page();
 
     $page->setTpl("checkout");
+});
+
+$app->get('/admin/categorias', function (){
+
+    User::verifyLogin();
+
+    $categorias = Categoria::listAll();
+
+    $page = new PageAdmin();
+
+    $page->setTpl("categorias", array("categorias" => $categorias));
+
+});
+
+$app->get('/admin/categorias/create', function (){
+
+    User::verifyLogin();
+
+    $page = new PageAdmin();
+
+    $page->setTpl("categorias-create");
+
+});
+
+$app->post('/admin/categorias/create', function (){
+
+    try{
+        User::verifyLogin();
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        Categoria::save($data['cat_descricao']);
+
+        http_response_code(200);
+        $retorno['status'] = true;
+    }catch(\Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
+});
+
+$app->get('/admin/categorias/{cat_codigo}/delete', function (Request $request, Response $response, array $args){
+
+    User::verifyLogin();
+
+    $cat_codigo = $args['cat_codigo'];
+
+    Categoria::delete($cat_codigo);
+
+    header("Location: /admin/categorias");
+    exit();
+});
+
+$app->get("/admin/categorias/{cat_codigo}", function (Request $request, Response $response, array $args){
+
+    User::verifyLogin();
+
+    $cat_codigo = $args['cat_codigo'];
+
+    $categoria = Categoria::get($cat_codigo);
+
+    $page = new PageAdmin();
+
+    $page->setTpl("categorias-update", array( "categoria" => $categoria ));
+
+});
+
+$app->post('/admin/categorias/update', function (){
+
+    try{
+        User::verifyLogin();
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        Categoria::update($data['cat_codigo'], $data['cat_descricao']);
+
+        http_response_code(200);
+        $retorno['status'] = true;
+    }catch(\Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
 });
 
 $app->run();

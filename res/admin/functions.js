@@ -136,3 +136,82 @@ async function atualizarUsuarioAdmin(user_codigo){
     }
 
 }
+
+async function cadastrarCategoria(){
+
+    const erro = validar_campos('cmp_cat_descricao')
+
+    if(erro === 1){
+        return
+    }
+
+    limpar_validacao()
+
+    const cat_descricao = document.querySelector('#cmp_cat_descricao').value
+
+    const url = "/admin/categorias/create"
+
+    const data = {
+        cat_descricao : cat_descricao
+    }
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    const response = await fetch(url, options)
+
+    if(response.status === 200){
+        alert("Categoria cadastrada!")
+        window.open('/admin/categorias', '_self')
+    }
+    else{
+        const erro = await response.json()
+        alert(erro.msg)
+    }
+
+}
+
+async function atualizarCategoria(cat_codigo){
+
+    const erro = validar_campos('cmp_cat_descricao');
+
+    if(erro === 1){
+        return
+    }
+
+    limpar_validacao();
+
+    const cat_descricao = document.querySelector('#cmp_cat_descricao').value
+
+    const url = `/admin/categorias/update`
+
+    const data = {
+        cat_codigo    : cat_codigo,
+        cat_descricao : cat_descricao
+    }
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    const response = await fetch(url, options)
+
+    if(response.status === 200){
+        alert("Categoria atualizada!")
+        window.open('/admin/categorias', '_self')
+    }
+    else{
+        const erro = await response.json()
+        alert(erro.msg)
+    }
+
+}
