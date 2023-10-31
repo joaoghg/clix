@@ -16,7 +16,8 @@ class User extends Model
 
         $sql = "
             SELECT *
-            FROM usuarios
+            FROM usuarios a
+            INNER JOIN pessoas b ON a.ps_codigo = b.ps_codigo
             WHERE user_login = :login
         ";
 
