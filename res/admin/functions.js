@@ -30,7 +30,7 @@ async function loginAdmin(){
 
     const response = await fetch(url, options)
 
-    if(response.ok){
+    if(response.status === 200){
         window.open('/admin', '_self')
     }
     else{
@@ -78,7 +78,7 @@ async function cadastrarUsuarioAdmin(){
 
     const response = await fetch(url, options)
 
-    if(response.ok){
+    if(response.status === 200){
         alert("Usuário cadastrado!")
         window.open('/admin/users', '_self')
     }
@@ -126,7 +126,7 @@ async function atualizarUsuarioAdmin(user_codigo){
 
     const response = await fetch(url, options)
 
-    if(response.ok){
+    if(response.status === 200){
         alert("Usuário Atualizado!")
         window.open('/admin/users', '_self')
     }
@@ -165,7 +165,7 @@ async function cadastrarCategoria(){
 
     const response = await fetch(url, options)
 
-    if(response.ok){
+    if(response.status === 200){
         alert("Categoria cadastrada!")
         window.open('/admin/categorias', '_self')
     }
@@ -205,7 +205,7 @@ async function atualizarCategoria(cat_codigo){
 
     const response = await fetch(url, options)
 
-    if(response.ok){
+    if(response.status === 200){
         alert("Categoria atualizada!")
         window.open('/admin/categorias', '_self')
     }
@@ -271,7 +271,7 @@ function preencherArrayCategorias(){
     })
 }
 
-async function cadastrarProduto(){
+function cadastrarProduto(){
     const erro = validar_campos('cmp_prd_descricao', 'cmp_prd_preco', 'cmp_prd_peso', 'cmp_prd_largura', 'cmp_prd_altura', 'cmp_prd_comprimento', 'cmp_prd_obs');
 
     if(erro === 1){
@@ -288,7 +288,6 @@ async function cadastrarProduto(){
         return
     }
 
-    debugger
     const formData = new FormData();
 
     formData.append('prd_descricao', document.querySelector('#cmp_prd_descricao').value)
@@ -307,25 +306,6 @@ async function cadastrarProduto(){
     for(const file of fileInput.files){
         formData.append('imagens[]', file)
     }
-
-    const url = "/admin/products/create"
-
-    const options = {
-        method: "POST",
-        body: formData
-    }
-
-    const response = await fetch(url, options)
-
-    if(response.ok){
-        alert("Produto cadastrado!")
-        window.open('/admin/products', '_self')
-    }
-    else{
-        const erro = await response.json()
-        alert(erro.msg)
-    }
-
 }
 
 //Fim da seção de funções para produtos

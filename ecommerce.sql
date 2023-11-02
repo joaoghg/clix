@@ -111,7 +111,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `ecommerce`.`produtos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce`.`produtos` (
-  `prd_codigo` INT(11) NOT NULL AUTO_INCREMENT,
+  `prd_codigo` INT(11) NOT NULL,
   `prd_descricao` VARCHAR(64) NOT NULL,
   `prd_preco` DECIMAL(10,2) NOT NULL,
   `prd_largura` DECIMAL(10,2) NOT NULL DEFAULT 0,
@@ -232,7 +232,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `ecommerce`.`produto_imagens`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce`.`produto_imagens` (
-   `img_codigo` INT(11) NOT NULL AUTO_INCREMENT,
+   `img_codigo` INT(11) NOT NULL,
    `prd_codigo` INT(11) NOT NULL,
    `img_caminho` VARCHAR(255) NOT NULL,
    PRIMARY KEY (img_codigo),

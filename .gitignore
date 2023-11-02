@@ -3,5 +3,3 @@ vendor/
 views-cache/
 .idea/
 composer.lock
-
-/res/template/img/produtos/*

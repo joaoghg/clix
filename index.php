@@ -9,13 +9,11 @@ $dotenv->load();
 
 ini_set('display_errors', 0);
 
-use DB\Sql;
 use Page\PageAdmin;
 use Slim\Factory\AppFactory;
 use Page\Page;
 use Model\User;
 use Model\Categoria;
-use Model\Products;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -104,7 +102,7 @@ $app->post('/admin/users/create', function (){
 
         User::save($data['ps_nome'], $data['user_senha'], $data['ps_contato'], $data['ps_email'], $data['user_login'], $data['user_admin']);
 
-        http_response_code(201);
+        http_response_code(200);
         $retorno['status'] = true;
     }catch(\Exception $erro){
         http_response_code(400);
@@ -201,7 +199,7 @@ $app->post('/admin/categorias/create', function (){
 
         Categoria::save($data['cat_descricao']);
 
-        http_response_code(201);
+        http_response_code(200);
         $retorno['status'] = true;
     }catch(\Exception $erro){
         http_response_code(400);
@@ -264,11 +262,9 @@ $app->get('/admin/products', function (){
 
     User::verifyLogin();
 
-    $products = Products::listAll();
-
     $page = new PageAdmin();
 
-    $page->setTpl("products", array("products" => $products));
+    $page->setTpl("products");
 
 });
 
@@ -281,36 +277,6 @@ $app->get('/admin/products/create', function (){
     $page = new PageAdmin();
 
     $page->setTpl("products-create", ["categorias" => $categorias]);
-
-});
-
-$app->post('/admin/products/create', function (){
-
-    User::verifyLogin();
-
-    extract($_REQUEST);
-
-    try{
-
-        $conn = new Sql();
-
-        $conn->beginTransaction();
-
-        $imagens = $_FILES['imagens'];
-
-        Products::save($conn, $prd_descricao, $prd_preco, $prd_peso, $prd_largura, $prd_altura, $prd_comprimento, $prd_obs, $categorias, $imagens);
-
-        $conn->commit();
-        $retorno['status'] = true;
-        http_response_code(201);
-    }catch(Exception $erro){
-        $conn->rollback();
-        http_response_code(400);
-        $retorno['status'] = false;
-        $retorno['msg'] = $erro->getMessage();
-    }
-    header("Content-Type: application/json");
-    exit(json_encode($retorno));
 
 });
 
