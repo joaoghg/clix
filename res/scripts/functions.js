@@ -27,6 +27,34 @@ function phoneMask(value) {
     return value
 }
 
+//Formatando campos de decimais
+function maskDecimal2(campo){
+
+    let valor = campo.value.replace(/[^0-9,]/g, '')
+
+    if(valor.trim() !== "" && valor.indexOf(',') != 0){
+
+        valor = valor.replace(/,/g, '.')
+
+        const parts = valor.split('.');
+        if (parts.length > 2) {
+            valor = parts[0] + '.' + parts[1];
+        }
+
+        if(valor.indexOf('.') !== -1 && parts[1].length > 2){
+            campo.value = String(Number(valor).toFixed(2)).replace('.', ',')
+        }
+        else{
+            campo.value = valor.replace('.', ',')
+        }
+
+    }
+    else{
+        campo.value = ''
+    }
+
+}
+
 function validar_campos(...ids){
     let erro = 0
 
@@ -63,7 +91,7 @@ function limpar_validacao(...ids){
 
 function abrirModal(id){
     
-    if(id === "modal_categorias"){
+    if(id === "modal_prd_categorias"){
         const chk_categorias = document.querySelectorAll('.chk-categorias')
 
         chk_categorias.forEach(function(chk) {
@@ -79,24 +107,3 @@ function abrirModal(id){
     $(`#${id}`).modal('show');
 
 }
-
-//Início da seção para funções para produtos
-
-let prd_categorias = [];
-
-function preencherArrayCategorias(){
-    const chk_categorias = document.querySelectorAll('.chk-categorias')
-    chk_categorias.checked = false
-
-    chk_categorias.forEach(function(chk) {
-        if(chk.checked){
-            prd_categorias.push(chk.dataset.catCodigo)
-        }
-        else if(prd_categorias.includes(chk.dataset.catCodigo)){
-            var indice = prd_categorias.indexOf(chk.dataset.catCodigo)
-            prd_categorias.splice(indice, 1)
-        }
-    })
-}
-
-//Fim da seção de funções para produtos

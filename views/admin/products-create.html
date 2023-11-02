@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 2 | Starter</title>
+<title>ClixAdmin | Produtos</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.6 -->
@@ -67,35 +67,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="box-body">
                 <div class="form-group col-sm-12">
                   <label for="cmp_prd_descricao">Descri&ccedil;&atilde;o</label>
-                  <input type="text" class="form-control" id="cmp_prd_descricao" placeholder="Digite a descri&ccedil;&atilde;o">
+                  <input type="text" class="form-control" maxlength="64" id="cmp_prd_descricao" placeholder="Digite a descri&ccedil;&atilde;o">
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-12">
                   <label for="cmp_prd_preco">Pre&ccedil;o</label>
-                  <input type="text" class="form-control" id="cmp_prd_preco" placeholder="Digite o pre&ccedil;o">
+                  <input type="text" class="form-control" id="cmp_prd_preco" onkeyup="maskDecimal2(this)" placeholder="Digite o pre&ccedil;o">
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-12">
                   <label for="cmp_prd_peso">Peso</label>
-                  <input type="text" class="form-control" id="cmp_prd_peso" placeholder="Digite o peso">
+                  <input type="text" class="form-control" id="cmp_prd_peso" onkeyup="maskDecimal2(this)" placeholder="Digite o peso">
                 </div>
                 <div class="form-group col-lg-3 col-md-4 col-sm-12">
                   <label for="cmp_prd_largura">Largura</label>
-                  <input type="text" class="form-control" id="cmp_prd_largura" onkeyup="handlePhone(event)" placeholder="Digite a largura">
+                  <input type="text" class="form-control" id="cmp_prd_largura"  onkeyup="maskDecimal2(this)" placeholder="Digite a largura">
                 </div>
                 <div class="form-group col-lg-3 col-md-4 col-sm-12">
                   <label for="cmp_prd_altura">Altura</label>
-                  <input type="email" class="form-control" id="cmp_prd_altura" placeholder="Digite a altura">
+                  <input type="email" class="form-control" id="cmp_prd_altura" onkeyup="maskDecimal2(this)" placeholder="Digite a altura">
                 </div>
                 <div class="form-group col-lg-3 col-md-4 col-sm-12">
                   <label for="cmp_prd_comprimento">Comprimento</label>
-                  <input type="password" class="form-control" id="cmp_prd_comprimento" placeholder="Digite o comprimento">
+                  <input type="password" class="form-control" id="cmp_prd_comprimento" onkeyup="maskDecimal2(this)" placeholder="Digite o comprimento">
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-6">
                   <label>&nbsp;</label>
-                  <button class="btn btn-block btn-primary" onclick="abrirModal('modal_categorias')">Categorias</button>
+                  <button class="btn btn-block btn-primary" onclick="abrirModal('modal_prd_categorias')">Categorias</button>
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-6">
                   <label>&nbsp;</label>
-                  <button class="btn btn-block btn-success">Imagens</button>
+                  <button class="btn btn-block btn-success" onclick="abrirModal('modal_prd_imagens')">Imagens</button>
+                </div>
+                <div class="form-group col-sm-12">
+                  <label for="cmp_prd_obs">Observa&ccedil;&otilde;es</label>
+                  <textarea class="form-control" id="cmp_prd_obs" placeholder="Digite as observa&ccedil;&otilde;es" style="resize: vertical"></textarea>
                 </div>
               </div>
               <!-- /.box-body -->
@@ -113,7 +117,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   </div>
 
-  <div class="modal fade" id="modal_categorias" tabindex="-1" role="dialog">
+  <div class="modal fade" id="modal_prd_categorias" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -125,7 +129,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             {loop="$categorias"}
               <div class="form-group col-sm-6 col-md-4">
                 <input id="categoria_{$value.cat_codigo}" type="checkbox" class="chk-categorias" data-cat-codigo="{$value.cat_codigo}">
-                <label for="categoria_{$value.cat_codigo}">{$value.cat_descricao}</label>
+                <label for="categoria_{$value.cat_codigo}" class="mb-0">{$value.cat_descricao}</label>
               </div>
             {/loop}
           </div>
@@ -133,6 +137,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
           <button type="button" class="btn btn-primary" onclick="preencherArrayCategorias()" data-dismiss="modal">Confirmar</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <input type="file" id="hd_prd_imagens" style="display:none;" multiple>
+  <div class="modal fade" id="modal_prd_imagens" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Adicionar Imagens</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row" id="div_prd_imagens" style="display: flex; flex-wrap: wrap;">
+
+          </div>
+          <div style="display: flex; justify-content: end">
+            <div class="col-sm-6">
+              <label for="hd_prd_imagens" class="btn btn-block btn-success">Adicionar Imagens</label>
+            </div>
+            <div class="col-sm-6">
+              <button onclick="$('#hd_prd_imagens').val(''); $('#div_prd_imagens').html('')" class="btn btn-block btn-danger">Remover Imagens</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -114,10 +114,10 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`produtos` (
   `prd_codigo` INT(11) NOT NULL,
   `prd_descricao` VARCHAR(64) NOT NULL,
   `prd_preco` DECIMAL(10,2) NOT NULL,
-  `prd_largura` DECIMAL(10,2) NOT NULL,
-  `prd_altura` DECIMAL(10,2) NOT NULL,
-  `prd_comprimento` DECIMAL(10,2) NOT NULL,
-  `prd_peso` DECIMAL(10,2) NOT NULL,
+  `prd_largura` DECIMAL(10,2) NOT NULL DEFAULT 0,
+  `prd_altura` DECIMAL(10,2) NOT NULL DEFAULT 0,
+  `prd_comprimento` DECIMAL(10,2) NOT NULL DEFAULT 0,
+  `prd_peso` DECIMAL(10,2) NOT NULL DEFAULT 0,
   `prd_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`prd_codigo`))
 ENGINE = InnoDB
@@ -285,9 +285,11 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`log_recuperar_senha` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE produtos
+ADD prd_obs TEXT NOT NULL;
+
 insert into pessoas (ps_nome, ps_email, ps_contato) values ('admin', 'admin@gmail.com', '1440028922');
 insert into usuarios(ps_codigo, user_login, user_senha, user_admin) values (1, 'admin', '$2y$12$N8hBTDJAc33fostLXYYrC.r1bMjjGWRS7urjAQA.V0ozP71wTyRK6', 1);
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

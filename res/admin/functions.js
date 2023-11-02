@@ -215,3 +215,97 @@ async function atualizarCategoria(cat_codigo){
     }
 
 }
+
+
+//Início da seção para funções para produtos
+
+let prd_categorias = [];
+
+const fileInput = document.getElementById('hd_prd_imagens');
+const imageDiv = document.getElementById('div_prd_imagens');
+
+fileInput.addEventListener('change', function () {
+    imageDiv.innerHTML = ''
+    const formatosPermitidos = ['jpg', 'png', 'jpeg']
+
+    for (const file of fileInput.files) {
+
+        if(!formatosPermitidos.includes(file.name.split('.').pop())){
+            alert("Apenas imagens são permitidas!");
+            imageDiv.innerHTML = ''
+            fileInput.value = ""
+            break
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const imageCard = document.createElement('div');
+            imageCard.classList.add('prd-image-card', 'col-sm-6', 'col-md-4', 'form-group')
+
+            const imagePreview = document.createElement('img')
+            imagePreview.classList.add('prd-image-preview')
+            imagePreview.src = e.target.result
+
+            imageCard.appendChild(imagePreview)
+            imageDiv.appendChild(imageCard)
+        }
+
+        reader.readAsDataURL(file)
+    }
+
+});
+
+function preencherArrayCategorias(){
+    const chk_categorias = document.querySelectorAll('.chk-categorias')
+    chk_categorias.checked = false
+
+    chk_categorias.forEach(function(chk) {
+        if(chk.checked){
+            prd_categorias.push(chk.dataset.catCodigo)
+        }
+        else if(prd_categorias.includes(chk.dataset.catCodigo)){
+            var indice = prd_categorias.indexOf(chk.dataset.catCodigo)
+            prd_categorias.splice(indice, 1)
+        }
+    })
+}
+
+function cadastrarProduto(){
+    const erro = validar_campos('cmp_prd_descricao', 'cmp_prd_preco', 'cmp_prd_peso', 'cmp_prd_largura', 'cmp_prd_altura', 'cmp_prd_comprimento', 'cmp_prd_obs');
+
+    if(erro === 1){
+        return
+    }
+
+    if(prd_categorias.length < 1){
+        alert("Selecione ao menos uma categoria")
+        return
+    }
+
+    if(fileInput.files.length < 1){
+        alert("Insira ao menos uma imagem")
+        return
+    }
+
+    const formData = new FormData();
+
+    formData.append('prd_descricao', document.querySelector('#cmp_prd_descricao').value)
+    formData.append('prd_preco', document.querySelector('#cmp_prd_preco').value)
+    formData.append('prd_peso', document.querySelector('#cmp_prd_peso').value)
+    formData.append('prd_largura', document.querySelector('#cmp_prd_largura').value)
+    formData.append('prd_altura', document.querySelector('#cmp_prd_altura').value)
+    formData.append('prd_comprimento', document.querySelector('#cmp_prd_comprimento').value)
+    formData.append('prd_obs', document.querySelector('#cmp_prd_obs').value)
+
+    const categorias = document.querySelectorAll('.chk-categorias:checked')
+    categorias.forEach(chk => {
+        formData.append('categorias[]', chk.dataset.catCodigo)
+    })
+
+    for(const file of fileInput.files){
+        formData.append('imagens[]', file)
+    }
+}
+
+//Fim da seção de funções para produtos
