@@ -59,4 +59,18 @@ class Sql {
 
 	}
 
+    public function beginTransaction()
+    {
+        $this->conn->beginTransaction();
+    }
+
+    public function commit()
+    {
+        $this->conn->commit();
+    }
+
+    public function rollback()
+    {
+        $this->conn->rollBack();
+    }
 }
