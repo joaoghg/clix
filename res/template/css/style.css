@@ -613,6 +613,40 @@ textarea.input {
   border-top: 3px solid var(--primary);
 }
 
+#navigation {
+  height: 30px; 
+}
+
+#navigation ul.main-nav li a {
+  line-height: 29.8px; 
+}
+
+#navigation {
+  background-color: #8A2BE2; 
+  display: flex;
+  align-items: center;
+  
+}
+
+#navigation ul.main-nav li a {
+  text-decoration: none;
+  color: #ffffff; 
+}
+@media (max-width: 768px) {
+    #navigation {
+        background-color: white;
+        border-bottom: 0px solid #E4E7ED;
+    }
+}
+
+#navigation ul.main-nav li {
+  margin-right: 10px; 
+}
+
+#navigation ul.main-nav li:last-child {
+  margin-right: 0;
+}
+
 /*----------------------------*\
 	Main nav
 \*----------------------------*/
