@@ -135,6 +135,10 @@ ul, ol {
   width: 100%;
 }
 
+.input-left-round{
+  border-radius: 40px 0 0 40px;
+}
+
 textarea.input {
   padding: 15px;
   min-height: 90px;
@@ -421,6 +425,8 @@ textarea.input {
 .header-row{
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /*----------------------------*\
@@ -465,21 +471,7 @@ textarea.input {
   padding: 15px 0px;
 }
 
-.header-search form {
-  position: relative;
-}
-
-.header-search form .input-select {
-  margin-right: -4px;
-  border-radius: 40px 0px 0px 40px;
-}
-
-.header-search form .input {
-  width: calc(100% - 260px);
-  margin-right: -4px;
-}
-
-.header-search form .search-btn {
+.header-search .search-btn {
   height: 40px;
   width: 100px;
   background: var(--primary);
@@ -500,10 +492,6 @@ textarea.input {
 
 .header-ctn>div {
   display: inline-block;
-}
-
-.header-ctn>div+div {
-  margin-left: 15px;
 }
 
 .header-ctn>div>a {
@@ -549,7 +537,7 @@ textarea.input {
   -webkit-box-shadow: 0px 0px 0px 2px #E4E7ED;
   box-shadow: 0px 0px 0px 2px #E4E7ED;
   z-index: 99;
-  right: 0;
+  right: -60px;
   opacity: 0;
   visibility: hidden;
 }
@@ -614,19 +602,6 @@ textarea.input {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-
-
-/*=========================================================
-	Wishlist
-===========================================================*/
-
-@media (max-width: 600px) {
-  .wishlist {
-      display: none;
-  }
-}
-
-
 
 /*=========================================================
 	Wishlist
@@ -718,6 +693,12 @@ textarea.input {
   .main-nav>li>a {
     padding: 15px;
     color: #FFF;
+  }
+  #div_wishlist{
+    display: none;
+  }
+  .header-ctn{
+    display: flex;
   }
 }
 
@@ -2203,7 +2184,7 @@ textarea.input {
 }
 
 @media only screen and (max-width: 480px) {
-  [class*='col-xs'] {
+  [class*='col-xs']:not(.header-responsive) {
     width: 100%;
   }
   .store-grid {
