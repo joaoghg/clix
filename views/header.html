@@ -35,12 +35,14 @@
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Wishlist -->
-                        <div>
+                       <div class="wishlist">
                             <a href="#">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
                                 <div class="qty">2</div>
                             </a>
+                        </div>
+                        <div id="wishlist-container1">
                         </div>
                         <!-- /Wishlist -->
 
@@ -105,7 +107,6 @@
     </div>
     <!-- NAVIGATION -->
     <nav id="navigation">
-        <!-- container -->
         <div class="container">
             <!-- responsive-nav -->
             <div id="responsive-nav">
@@ -123,6 +124,25 @@
             </div>
             <!-- /responsive-nav -->
         </div>
-        <!-- /container -->
+        
+      
     </nav>
 </header>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script></script>
+<script>
+    $(document).ready(function() {
+        // Verifica o tamanho da tela ao carregar a página
+        checkWindowSize();
+
+        // Verifica o tamanho da tela quando a janela é redimensionada
+        $(window).resize(checkWindowSize);
+
+        function checkWindowSize() {
+            if ($(window).width() <= 600) {
+                // Move o "Wishlist" para o novo local
+                $(".wishlist").appendTo("#wishlist-container1");
+            }
+        }
+    });
+</script>
+
