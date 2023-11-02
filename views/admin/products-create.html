@@ -73,22 +73,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <label for="cmp_prd_preco">Pre&ccedil;o</label>
                   <input type="text" class="form-control" id="cmp_prd_preco" placeholder="Digite o pre&ccedil;o">
                 </div>
-                <div class="form-group">
-                  <label for="cmp_ps_contato">Telefone</label>
-                  <input type="text" class="form-control" id="cmp_ps_contato" onkeyup="handlePhone(event)" placeholder="Digite o telefone">
+                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                  <label for="cmp_prd_peso">Peso</label>
+                  <input type="text" class="form-control" id="cmp_prd_peso" placeholder="Digite o peso">
                 </div>
-                <div class="form-group">
-                  <label for="cmp_ps_email">E-mail</label>
-                  <input type="email" class="form-control" id="cmp_ps_email" placeholder="Digite o e-mail">
+                <div class="form-group col-lg-3 col-md-4 col-sm-12">
+                  <label for="cmp_prd_largura">Largura</label>
+                  <input type="text" class="form-control" id="cmp_prd_largura" onkeyup="handlePhone(event)" placeholder="Digite a largura">
                 </div>
-                <div class="form-group">
-                  <label for="cmp_user_senha">Senha</label>
-                  <input type="password" class="form-control" id="cmp_user_senha" placeholder="Digite a senha">
+                <div class="form-group col-lg-3 col-md-4 col-sm-12">
+                  <label for="cmp_prd_altura">Altura</label>
+                  <input type="email" class="form-control" id="cmp_prd_altura" placeholder="Digite a altura">
                 </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" id="cmp_user_admin" value="1"> Acesso de Administrador
-                  </label>
+                <div class="form-group col-lg-3 col-md-4 col-sm-12">
+                  <label for="cmp_prd_comprimento">Comprimento</label>
+                  <input type="password" class="form-control" id="cmp_prd_comprimento" placeholder="Digite o comprimento">
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-6">
+                  <label>&nbsp;</label>
+                  <button class="btn btn-block btn-primary" onclick="abrirModal('modal_categorias')">Categorias</button>
+                </div>
+                <div class="form-group col-lg-3 col-md-6 col-sm-6">
+                  <label>&nbsp;</label>
+                  <button class="btn btn-block btn-success">Imagens</button>
                 </div>
               </div>
               <!-- /.box-body -->
@@ -106,6 +113,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   </div>
 
+  <div class="modal fade" id="modal_categorias" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Selecionar Categorias</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row" style="display: flex; flex-wrap: wrap;">
+            {loop="$categorias"}
+              <div class="form-group col-sm-6 col-md-4">
+                <input id="categoria_{$value.cat_codigo}" type="checkbox" class="chk-categorias" data-cat-codigo="{$value.cat_codigo}">
+                <label for="categoria_{$value.cat_codigo}">{$value.cat_descricao}</label>
+              </div>
+            {/loop}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary" onclick="preencherArrayCategorias()" data-dismiss="modal">Confirmar</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
   {include="footer"}
 
   <!-- REQUIRED JS SCRIPTS -->
@@ -119,6 +151,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="/res/admin/functions.js"></script>
   <script src="/res/scripts/functions.js"></script>
+  <script src="/res/scripts/produtos/produtos.js"></script>
+
+  <script>
+    document.querySelector('#menu_item_produtos').classList.add('active')
+  </script>
 
   <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the

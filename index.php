@@ -260,6 +260,8 @@ $app->post('/admin/categorias/update', function (){
 
 $app->get('/admin/products', function (){
 
+    User::verifyLogin();
+
     $page = new PageAdmin();
 
     $page->setTpl("products");
@@ -268,9 +270,13 @@ $app->get('/admin/products', function (){
 
 $app->get('/admin/products/create', function (){
 
+    User::verifyLogin();
+
+    $categorias = Categoria::listAll();
+
     $page = new PageAdmin();
 
-    $page->setTpl("products-create");
+    $page->setTpl("products-create", ["categorias" => $categorias]);
 
 });
 

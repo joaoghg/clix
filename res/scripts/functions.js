@@ -60,3 +60,43 @@ function limpar_validacao(...ids){
     }
 
 }
+
+function abrirModal(id){
+    
+    if(id === "modal_categorias"){
+        const chk_categorias = document.querySelectorAll('.chk-categorias')
+
+        chk_categorias.forEach(function(chk) {
+            if(!prd_categorias.includes(chk.dataset.catCodigo)){
+                chk.checked = false;
+            }
+            else{
+                chk.checked = true;
+            }
+        })
+    }
+
+    $(`#${id}`).modal('show');
+
+}
+
+//Início da seção para funções para produtos
+
+let prd_categorias = [];
+
+function preencherArrayCategorias(){
+    const chk_categorias = document.querySelectorAll('.chk-categorias')
+    chk_categorias.checked = false
+
+    chk_categorias.forEach(function(chk) {
+        if(chk.checked){
+            prd_categorias.push(chk.dataset.catCodigo)
+        }
+        else if(prd_categorias.includes(chk.dataset.catCodigo)){
+            var indice = prd_categorias.indexOf(chk.dataset.catCodigo)
+            prd_categorias.splice(indice, 1)
+        }
+    })
+}
+
+//Fim da seção de funções para produtos

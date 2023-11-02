@@ -118,7 +118,6 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`produtos` (
   `prd_altura` DECIMAL(10,2) NOT NULL,
   `prd_comprimento` DECIMAL(10,2) NOT NULL,
   `prd_peso` DECIMAL(10,2) NOT NULL,
-  `prd_url` VARCHAR(128) NOT NULL,
   `prd_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`prd_codigo`))
 ENGINE = InnoDB
