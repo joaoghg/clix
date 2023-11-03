@@ -2232,27 +2232,213 @@ textarea.input {
 }
 /* ESTILOS CHEKOUT */
 
-.titulo-endereco {
+.box {
+  margin-top: 25px;
+  margin-right: 25px;
+}
+
+.centralizar-titulo {
   align-items: center;
   display: flex;
 }
 
-.input-endereco {
-  display: flex;
-  align-items: center;
-}
-.input-endereco svg {
+.centralizar-titulo svg {
   margin-right: 5px;
-} 
-
-.input-endereco .rua {
-  width: 70%;
 }
 
-.input-endereco .numero {
+.centralizacao-end {
+  display: flex;
+  min-width: 100%;
+  justify-content: space-between;
+}
+
+.centralizacao-end1 {
+  display: flex;
+  min-width: 100%;
+}
+
+.tamanho-input {
+  width: 60%;
+}
+
+.tamanho-input1 {
   width: 30%;
 }
 
 .cupom {
   margin-top: 10px;
+}
+
+.order-notes {
+  margin-bottom: 30px;
+}
+
+.group {
+  position: relative;
+  margin-top: 25px;
+}
+
+.input1 {
+  font-size: 16px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #515151;
+  background: transparent;
+}
+
+.input1:focus {
+  outline: none;
+}
+
+.group label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.input1:focus~label,
+.input1:valid~label {
+  top: -20px;
+  font-size: 14px;
+  color: #5264AE;
+}
+
+.bar {
+  position: relative;
+  display: block;
+  width: 50%;
+}
+
+.bar:before,
+.bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #5264AE;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+  left: 50%;
+}
+
+.bar:after {
+  right: 50%;
+}
+
+.input:focus~.bar:before,
+.input:focus~.bar:after {
+  width: 50%;
+}
+
+.highlight {
+  position: absolute;
+  height: 60%;
+  width: 10%;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.input:focus~.highlight {
+  animation: inputHighlighter 0.3s ease;
+}
+
+@keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+.escondido {
+  display: none;
+}
+
+select#estados {
+  background-color: #D4D2D5;
+  color: rgb(0, 0, 0);
+  padding: 8px;
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+select#estados option {
+  background-color: #D4D2D5;
+  color: rgb(0, 0, 0);
+}
+
+.escondido {
+  display: none;
+}
+
+#caixa-dialogo {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: #fff;
+  width: 100%;
+}
+
+.conteudo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.close {
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.mostrarcaixa {
+  border: none;
+  color: #5264AE;
+  font-size: 18px;
+  margin-top: 19px;
+}
+
+.mostrarcaixa:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.input-disabled {
+  background-color: #f2f2f2;
+  color: #999;
+  cursor: not-allowed;
+  border: 1px solid #ddd;
 }

@@ -27,6 +27,26 @@ function phoneMask(value) {
     return value
 }
 
+// placeholder Select
+function hidePlaceholder() {
+    const select = document.getElementById("estados");
+    select.options[0].style.display = "none";
+}
+
+// botao Novo Endereco
+
+const botaoMostrar = document.getElementById('mostrar-caixa');
+        const caixaDialogo = document.getElementById('caixa-dialogo');
+        const botaoFechar = document.getElementById('fechar-caixa');
+
+        botaoMostrar.addEventListener('click', () => {
+            caixaDialogo.style.display = 'block';
+        });
+
+        botaoFechar.addEventListener('click', () => {
+            caixaDialogo.style.display = 'none';
+        });
+
 //Formatando campos de decimais
 function maskDecimal2(campo){
 

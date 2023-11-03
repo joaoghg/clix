@@ -1,245 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>CliX! - Checkout</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
- 		<!-- Google font -->
- 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <title>CliX! - Checkout</title>
 
-		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="/res/template/css/bootstrap.min.css"/>
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="/res/template/css/slick.css"/>
-		<link type="text/css" rel="stylesheet" href="/res/template/css/slick-theme.css"/>
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/bootstrap.min.css" />
 
-		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="/res/template/css/nouislider.min.css"/>
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/res/template/css/slick-theme.css" />
 
-		<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="/res/template/css/font-awesome.min.css">
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/nouislider.min.css" />
 
-		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="/res/template/css/style.css"/>
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/res/template/css/font-awesome.min.css">
 
-    </head>
-	<body>
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/style.css" />
 
-		
-		{include="header"}
-	    <!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12 end">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-							class="bi bi-cart" viewBox="0 0 16 16">
-							<path
-								d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-						</svg>
-						<h3 class="breadcrumb-header">Carrinho</h3>
-						<i class="bi bi-cart"></i>
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li class="active">carrinho</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-	
-					<div class="col-md-7">
-						<!-- Billing Details -->
-						<div class="billing-details">
-							<div class="section-title titulo-endereco">
-								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-									class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-									<path
-										d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-								</svg>
-								<h3 class="title">Endereço de entrega</h3>
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" id="cep" name="cep" maxlength="9" onkeyup="cep1(event)"
-									placeholder="CEP">
-							</div>
-							<div class="form-group input-endereco">
-								<input class="input rua" type="text" name="address" placeholder="Rua" required>
-								<input class="input numero" type="text" name="address" maxlength="6" placeholder="Número" required>
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="country" placeholder="Logradouro/Referência">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="city" placeholder="Complemento" required>
-							</div>                    
-							<div class="form-group">
-								<input class="input" type="text" name="city" placeholder="Bairro" required>
-							</div>  
-							<div class="form-group input-endereco">
-								<input class="input rua" type="tel" name="tel" placeholder="Cidade" required>
-								<input class="input numero" type="tel" name="tel" placeholder="Estado" required>
-							</div>
-							<div class="form-group">
-								<input type="tel" class="input" id="telefone" name="telefone" maxlength="15" onkeyup="handlePhone(event)" placeholder="Telefone">
-							</div>
-						</div>
-						<!-- /Billing Details -->
-	
-						<!-- Shiping Details -->
-						<div class="shiping-details">
-							<div class="section-title">
-								<h3 class="title">Shiping address</h3>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="shiping-address">
-								<label for="shiping-address">
-									<span></span>
-									Ship to a diffrent address?
-								</label>
-								<div class="caption">
-									<div class="form-group">
-										<input class="input" type="text" name="first-name" placeholder="First Name">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="last-name" placeholder="Last Name">
-									</div>
-									<div class="form-group">
-										<input class="input" type="email" name="email" placeholder="Email">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="address" placeholder="Address">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="city" placeholder="City">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="country" placeholder="Country">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-									</div>
-									<div class="form-group">
-										<input class="input" type="tel" name="tel" placeholder="Telephone">
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- /Shiping Details -->
-	
-						<!-- Order notes -->
-						<div class="order-notes">
-							<textarea class="input" placeholder="Order Notes"></textarea>
-						</div>
-						<!-- /Order notes -->
-					</div>
-	
-					<!-- Order Details -->
-					<div class="col-md-5 order-details">
-						<div class="section-title text-center">
-							<h3 class="title">Seu Pedido</h3>
-						</div>
-						<div class="order-summary">
-							<div class="order-col">
-								<div><strong>PRODUTO</strong></div>
-								<div><strong>TOTAL</strong></div>
-							</div>
-							<div class="order-products">
-								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
-									<div>R$205,00</div>
-								</div>
-								<div class="order-col">
-									<div>2x Product Name Goes Here</div>
-									<div>R$205,00</div>
-								</div>
-							</div>
-							<div class="order-col">
-								<div>Frete</div>
-								<div class="text-success"><strong>GRÁTIS</strong></div>
-							</div>
-							<div class="order-col cupom">
-								<label for="cupom">Insira seu cupom</label>
-								<input type="text" class="input">
-							</div>
-							<div class="order-col">
-								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">R$410,00</strong></div>
-							</div>
-	
-						</div>
-	
-						<a href="#" class="primary-btn order-submit">Ir para pagamento</a>
-					</div>
-					<!-- /Order Details -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
-	
-		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
+</head>
 
-		<!-- NEWSLETTER -->
-		{include="footer"}
+<body>
 
-		<!-- jQuery Plugins -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/slick.min.js"></script>
-		<script src="js/nouislider.min.js"></script>
-		<script src="js/jquery.zoom.min.js"></script>
-		<script src="js/main.js"></script>
-		<script src="res/scripts/functions.js"></script>
-	</body>
+
+    {include="header"}
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb" class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-cart" viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                    </svg>
+                    <h3 class="breadcrumb-header">Carrinho</h3>
+                    <i class="bi bi-cart"></i>
+                    <ul class="breadcrumb-tree">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">carrinho</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md-7">
+                    <!-- Billing Details -->
+                    <div class="billing-details">
+                        <div class="section-title centralizar-titulo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                            </svg>
+                            <h3 class="title">Endereço de entrega</h3>
+                        </div>
+                        <form>
+                            <div class="group">
+                                <input required="" type="text" class="input1 input-disabled" onkeyup="cep1(event)"
+                                    maxlength="9" disabled>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>CEP</label>
+                            </div>
+                            <div class="centralizacao-end">
+                                <div class="group tamanho-input">
+                                    <input required="" type="text" class="input1 input-disabled" disabled>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Rua</label>
+                                </div>
+
+                                <div class="group tamanho-input1">
+                                    <input required="" type="text" class="input1 input-disabled" disabled>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Número</label>
+                                </div>
+                            </div>
+                            <div class="group">
+                                <input required="" type="text" class="input1 input-disabled" disabled>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Complemento</label>
+                            </div>
+                            <div class="group">
+                                <input required="" type="text" class="input1 input-disabled"
+                                    onkeyup="handlePhone(event)" maxlength="14" disabled>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Telefone</label>
+                            </div>
+                            <div class="group">
+                                <input required="" type="text" class="input1 input-disabled"
+                                    oninput="this.value = this.value.replace(/\d/g, '')" disabled>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Bairro</label>
+                            </div>
+                            <div class="centralizacao-end1 ">
+                                <div class="box">
+                                    <select id="estados" name="UF" class="input-disabled" onclick="hidePlaceholder()" disabled>
+                                        <option value="">UF</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AP">AP</option>
+                                        <option value="AM">AM</option>
+                                        <option value="BA">BA</option>
+                                        <option value="CE">CE</option>
+                                        <option value="DF">DF</option>
+                                        <option value="ES">ES</option>
+                                        <option value="GO">GO</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MG">MG</option>
+                                        <option value="PA">PA</option>
+                                        <option value="PB">PB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="PE">PE</option>
+                                        <option value="PI">PI</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="RN">RN</option>
+                                        <option value="RS">RS</option>
+                                        <option value="RO">RO</option>
+                                        <option value="RR">RR</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SP">SP</option>
+                                        <option value="SE">SE</option>
+                                        <option value="TO">TO</option>
+                                    </select>
+                                </div>
+
+                                <div class="group tamanho-input">
+                                    <input required="" type="text" class="input1 input-disabled"
+                                        oninput="this.value = this.value.replace(/\d/g, '')" disabled>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Cidade</label>
+                                </div>
+                            </div>
+                        </form>
+                        <button id="mostrar-caixa" class="mostrarcaixa">Novo endereço</button>
+                        <div id="caixa-dialogo" class="escondido">
+                            <div class="conteudo">
+                                <svg id='fechar-caixa' xmlns="http://www.w3.org/2000/svg" height="1.4em"
+                                    viewBox="0 0 384 512"
+                                    class="close"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                                </svg>
+                                <div class="group">
+                                    <input required="" type="text" class="input1 " onkeyup="cep1(event)" maxlength="9">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>CEP</label>
+                                </div>
+                                <div class="centralizacao-end">
+                                    <div class="group tamanho-input">
+                                        <input required="" type="text" class="input1">
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label>Rua</label>
+                                    </div>
+
+                                    <div class="group tamanho-input1">
+                                        <input required="" type="text" class="input1">
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label>Número</label>
+                                    </div>
+                                </div>
+                                <div class="group">
+                                    <input required="" type="text" class="input1">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Complemento</label>
+                                </div>
+                                <div class="group">
+                                    <input required="" type="text" class="input1" onkeyup="handlePhone(event)"
+                                        maxlength="14">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Telefone</label>
+                                </div>
+                                <div class="group">
+                                    <input required="" type="text" class="input1"
+                                        oninput="this.value = this.value.replace(/\d/g, '')">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Bairro</label>
+                                </div>
+                                <div class="centralizacao-end1">
+                                    <div class="box">
+                                        <select id="estados" name="UF" onclick="hidePlaceholder()">
+                                            <option value="">UF</option>
+                                            <option value="AC">AC</option>
+                                            <option value="AL">AL</option>
+                                            <option value="AP">AP</option>
+                                            <option value="AM">AM</option>
+                                            <option value="BA">BA</option>
+                                            <option value="CE">CE</option>
+                                            <option value="DF">DF</option>
+                                            <option value="ES">ES</option>
+                                            <option value="GO">GO</option>
+                                            <option value="MA">MA</option>
+                                            <option value="MT">MT</option>
+                                            <option value="MS">MS</option>
+                                            <option value="MG">MG</option>
+                                            <option value="PA">PA</option>
+                                            <option value="PB">PB</option>
+                                            <option value="PR">PR</option>
+                                            <option value="PE">PE</option>
+                                            <option value="PI">PI</option>
+                                            <option value="RJ">RJ</option>
+                                            <option value="RN">RN</option>
+                                            <option value="RS">RS</option>
+                                            <option value="RO">RO</option>
+                                            <option value="RR">RR</option>
+                                            <option value="SC">SC</option>
+                                            <option value="SP">SP</option>
+                                            <option value="SE">SE</option>
+                                            <option value="TO">TO</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="group tamanho-input">
+                                        <input required="" type="text" class="input1"
+                                            oninput="this.value = this.value.replace(/\d/g, '')">
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label>Cidade</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Billing Details -->
+
+                    <!-- Shiping Details -->
+
+                    <!-- /Shiping Details -->
+
+                    <!-- Order notes -->
+                    <div class="order-notes">
+                        <textarea class="input" placeholder="Detalhes adicionais"></textarea>
+                    </div>
+                    <!-- /Order notes -->
+                </div>
+
+                <!-- Order Details -->
+                <div class="col-md-5 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title">Seu Pedido</h3>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong>PRODUTO</strong></div>
+                            <div><strong>TOTAL</strong></div>
+                        </div>
+                        <div class="order-products">
+                            <div class="order-col">
+                                <div>1x Product Name Goes Here</div>
+                                <div>R$205,00</div>
+                            </div>
+                            <div class="order-col">
+                                <div>2x Product Name Goes Here</div>
+                                <div>R$205,00</div>
+                            </div>
+                        </div>
+                        <div class="order-col">
+                            <div>Frete</div>
+                            <div class="text-success"><strong>GRÁTIS</strong></div>
+                        </div>
+                        <div class="order-col cupom">
+                            <label for="cupom">Insira seu cupom</label>
+                            <input type="text" class="input">
+                        </div>
+                        <div class="order-col">
+                            <div><strong>TOTAL</strong></div>
+                            <div><strong class="order-total">R$410,00</strong></div>
+                        </div>
+
+                    </div>
+
+                    <a href="#" class="primary-btn order-submit">Ir para pagamento</a>
+                </div>
+                <!-- /Order Details -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- NEWSLETTER -->
+    <div id="newsletter" class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="newsletter">
+                        <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                        <form>
+                            <input class="input" type="email" placeholder="Enter Your Email">
+                            <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                        </form>
+                        <ul class="newsletter-follow">
+                            <li>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    {include="footer"}
+
+    <!-- jQuery Plugins -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/nouislider.min.js"></script>
+    <script src="js/jquery.zoom.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="res/scripts/functions.js"></script>
+</body>
+
 </html>
