@@ -287,7 +287,6 @@ async function cadastrarProduto(){
         return
     }
 
-    debugger
     const formData = new FormData();
 
     formData.append('prd_descricao', document.querySelector('#cmp_prd_descricao').value)
@@ -318,6 +317,59 @@ async function cadastrarProduto(){
 
     if(response.ok){
         alert("Produto cadastrado!")
+        window.open('/admin/products', '_self')
+    }
+    else{
+        const erro = await response.json()
+        alert(erro.msg)
+    }
+
+}
+
+async function atualizarProduto(prd_codigo){
+
+    const erro = validar_campos('cmp_prd_descricao', 'cmp_prd_preco', 'cmp_prd_peso', 'cmp_prd_largura', 'cmp_prd_altura', 'cmp_prd_comprimento', 'cmp_prd_obs');
+
+    if(erro === 1){
+        return
+    }
+
+    if(prd_categorias.length < 1){
+        alert("Selecione ao menos uma categoria")
+        return
+    }
+
+    if(document.querySelector('#div_prd_imagens').innerHTML == ""){
+        alert("Insira ao menos uma imagem")
+        return
+    }
+
+    const formData = new FormData();
+
+    formData.append('prd_descricao', document.querySelector('#cmp_prd_descricao').value)
+    formData.append('prd_preco', document.querySelector('#cmp_prd_preco').value)
+    formData.append('prd_peso', document.querySelector('#cmp_prd_peso').value)
+    formData.append('prd_largura', document.querySelector('#cmp_prd_largura').value)
+    formData.append('prd_altura', document.querySelector('#cmp_prd_altura').value)
+    formData.append('prd_comprimento', document.querySelector('#cmp_prd_comprimento').value)
+    formData.append('prd_obs', document.querySelector('#cmp_prd_obs').value)
+
+    const categorias = document.querySelectorAll('.chk-categorias:checked')
+    categorias.forEach(chk => {
+        formData.append('categorias[]', chk.dataset.catCodigo)
+    })
+
+    const url = `/admin/products/${prd_codigo}`
+
+    const options = {
+        method: "POST",
+        body: formData
+    }
+
+    const response = await fetch(url, options)
+
+    if(response.ok){
+        alert("Produto atualizado!")
         window.open('/admin/products', '_self')
     }
     else{

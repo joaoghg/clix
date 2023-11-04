@@ -288,7 +288,7 @@ $app->post('/admin/products/create', function (){
 
     User::verifyLogin();
 
-    extract($_REQUEST);
+    extract($_POST);
 
     try{
 
@@ -298,7 +298,9 @@ $app->post('/admin/products/create', function (){
 
         $imagens = $_FILES['imagens'];
 
-        Products::save($conn, $prd_descricao, $prd_preco, $prd_peso, $prd_largura, $prd_altura, $prd_comprimento, $prd_obs, $categorias, $imagens);
+        $products = new Products();
+
+        $products->save($conn, $prd_descricao, $prd_preco, $prd_peso, $prd_largura, $prd_altura, $prd_comprimento, $prd_obs, $categorias, $imagens);
 
         $conn->commit();
         $retorno['status'] = true;
@@ -330,6 +332,30 @@ $app->get("/admin/products/{prd_codigo}", function (Request $request, Response $
 
     $page->setTpl("products-update", array( "produto" => $produto, "imagens" => $imagens, "categorias" => $categorias ));
 
+});
+
+$app->post("/admin/products/{prd_codigo}", function (Request $request, Response $response, array $args){
+
+    User::verifyLogin();
+
+    $prd_codigo = $args['prd_codigo'];
+    extract($_POST);
+
+    try{
+
+        $products = new Products();
+
+        $products->update($prd_codigo, $prd_descricao, $prd_preco, $prd_peso, $prd_largura, $prd_altura, $prd_comprimento, $prd_obs, $categorias);
+
+        $retorno['status'] = true;
+        http_response_code(200);
+    }catch(Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
 });
 
 $app->run();

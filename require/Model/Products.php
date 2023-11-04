@@ -22,7 +22,7 @@ class Products extends Model
 
     }
 
-    public static function save($conn, $prd_descricao, $prd_preco, $prd_peso, $prd_largura, $prd_altura, $prd_comprimento, $prd_obs, array $categorias, array $imagens)
+    public function save($conn, $prd_descricao, $prd_preco, $prd_peso, $prd_largura, $prd_altura, $prd_comprimento, $prd_obs, array $categorias, array $imagens)
     {
 
         $sql = "
@@ -51,22 +51,7 @@ class Products extends Model
 
         $prd_codigo = $result[0]['prd_codigo'];
 
-        foreach ($categorias as $categoria){
-
-            $categoria = (int) $categoria;
-
-            $sql = "
-                INSERT INTO produto_categoria
-                (cat_codigo, prd_codigo)
-                VALUES 
-                (:cat_codigo, :prd_codigo)
-            ";
-            $conn->query($sql, array(
-                ":cat_codigo" => $categoria,
-                ":prd_codigo" => $prd_codigo
-            ));
-
-        }
+        self::inserirCategorias($categorias, $prd_codigo, $conn);
 
         for ($i = 0; $i < count($imagens['name']); $i++){
 
@@ -154,6 +139,91 @@ class Products extends Model
         return $conn->select($sql, array(
             ":prd_codigo" => $prd_codigo
         ));
+
+    }
+
+    public static function saveImage($img_codigo)
+    {
+
+
+
+    }
+
+    public static function deleteImage($img_codigo)
+    {
+
+
+
+    }
+
+    public function update($prd_codigo, $prd_descricao, $prd_preco, $prd_peso, $prd_largura, $prd_altura, $prd_comprimento, $prd_obs, array $categorias)
+    {
+
+        try{
+
+            $conn = new Sql();
+
+            $conn->beginTransaction();
+
+            $sql = "
+                
+                UPDATE produtos
+                SET prd_descricao = :prd_descricao,
+                    prd_preco = :prd_preco,
+                    prd_peso = :prd_peso,
+                    prd_largura = :prd_largura,
+                    prd_altura = :prd_altura,
+                    prd_comprimento = :prd_comprimento,
+                    prd_obs = :prd_obs
+                WHERE prd_codigo = :prd_codigo;
+
+                DELETE FROM produto_categoria
+                WHERE prd_codigo = :prd_codigo;
+
+            ";
+
+            $dados = array(
+                ":prd_descricao" => $prd_descricao,
+                ":prd_preco" => $prd_preco,
+                ":prd_peso" => $prd_peso,
+                ":prd_largura" => $prd_largura,
+                ":prd_altura" => $prd_altura,
+                ":prd_comprimento" => $prd_comprimento,
+                ":prd_obs" => $prd_obs,
+                ":prd_codigo" => $prd_codigo
+            );
+
+            $conn->query($sql, $dados);
+
+            self::inserirCategorias($categorias, $prd_codigo, $conn);
+
+            $conn->commit();
+        }catch(\Exception $erro){
+            $conn->rollback();
+            throw new \Exception($erro->getMessage());
+        }
+
+    }
+
+    public static function inserirCategorias(array $categorias, $prd_codigo,  $conn)
+    {
+
+        foreach ($categorias as $categoria){
+
+            $categoria = (int) $categoria;
+
+            $sql = "
+                INSERT INTO produto_categoria
+                (cat_codigo, prd_codigo)
+                VALUES 
+                (:cat_codigo, :prd_codigo)
+            ";
+            $conn->query($sql, array(
+                ":cat_codigo" => $categoria,
+                ":prd_codigo" => $prd_codigo
+            ));
+
+        }
 
     }
 
