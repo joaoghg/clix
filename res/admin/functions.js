@@ -258,7 +258,6 @@ fileInput.addEventListener('change', function () {
 
 function preencherArrayCategorias(){
     const chk_categorias = document.querySelectorAll('.chk-categorias')
-    chk_categorias.checked = false
 
     chk_categorias.forEach(function(chk) {
         if(chk.checked){
@@ -325,6 +324,10 @@ async function cadastrarProduto(){
         const erro = await response.json()
         alert(erro.msg)
     }
+
+}
+
+async function inserirImagem(){
 
 }
 

@@ -102,4 +102,59 @@ class Products extends Model
 
     }
 
+    public static function get($prd_codigo)
+    {
+
+        $conn = new Sql();
+
+        $sql = "
+            SELECT *
+            FROM produtos
+            WHERE prd_codigo = :prd_codigo
+        ";
+
+        $result = $conn->select($sql, array(
+            ":prd_codigo" => $prd_codigo
+        ));
+
+        return $result[0];
+
+    }
+
+    public static function getCategorias($prd_codigo)
+    {
+
+        $conn = new Sql();
+
+        $sql = "
+            SELECT cat.*, CASE WHEN pcat.prd_codigo IS NOT NULL THEN 1 ELSE 0 END checked
+            FROM categorias cat
+            LEFT JOIN produto_categoria pcat ON pcat.cat_codigo = cat.cat_codigo
+            WHERE prd_codigo = :prd_codigo
+        ";
+
+        return $conn->select($sql, array(
+            ":prd_codigo" => $prd_codigo
+        ));
+
+
+    }
+
+    public static function getImages($prd_codigo)
+    {
+
+        $conn = new Sql();
+
+        $sql = "
+            SELECT *
+            FROM produto_imagens
+            WHERE prd_codigo = :prd_codigo
+        ";
+
+        return $conn->select($sql, array(
+            ":prd_codigo" => $prd_codigo
+        ));
+
+    }
+
 }

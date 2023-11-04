@@ -314,4 +314,22 @@ $app->post('/admin/products/create', function (){
 
 });
 
+$app->get("/admin/products/{prd_codigo}", function (Request $request, Response $response, array $args){
+
+    User::verifyLogin();
+
+    $prd_codigo = $args['prd_codigo'];
+
+    $produto = Products::get($prd_codigo);
+
+    $categorias = Products::getCategorias($prd_codigo);
+
+    $imagens = Products::getImages($prd_codigo);
+
+    $page = new PageAdmin();
+
+    $page->setTpl("products-update", array( "produto" => $produto, "imagens" => $imagens, "categorias" => $categorias ));
+
+});
+
 $app->run();
