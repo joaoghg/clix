@@ -358,4 +358,53 @@ $app->post("/admin/products/{prd_codigo}", function (Request $request, Response 
     exit(json_encode($retorno));
 });
 
+$app->post("/admin/products/images/delete", function (){
+
+    User::verifyLogin();
+
+    extract($_POST);
+
+    try{
+
+        Products::deleteImage($img_codigo);
+
+        $imagens = Products::getImages($prd_codigo);
+
+        $retorno['status'] = true;
+        $retorno['imagens'] = $imagens;
+        http_response_code(200);
+    }catch(Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+});
+
+$app->post("/admin/products/images/create", function (){
+
+    User::verifyLogin();
+
+    extract($_POST);
+    extract($_FILES);
+
+    try{
+
+        Products::saveImage($imagens, $prd_codigo);
+
+        $imagens = Products::getImages($prd_codigo);
+
+        $retorno['status'] = true;
+        $retorno['imagens'] = $imagens;
+        http_response_code(200);
+    }catch(Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+});
+
 $app->run();

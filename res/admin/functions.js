@@ -379,7 +379,90 @@ async function atualizarProduto(prd_codigo){
 
 }
 
-async function inserirImagem(){
+async function inserirPrdImagem(prd_codigo, e){
+
+    const input = e.target;
+    const formData = new FormData();
+
+    formData.append('prd_codigo', prd_codigo)
+
+    for(const file of input.files){
+        formData.append('imagens[]', file)
+    }
+
+    input.value = ''
+
+    const url = `/admin/products/images/create`
+
+    const options = {
+        method: "POST",
+        body: formData
+    }
+
+    const response = await fetch(url, options)
+
+    if(response.ok){
+        alert("Imagem inserida!");
+
+        const data = await response.json()
+
+        carregarPrdImagens(data.imagens, prd_codigo);
+    }
+    else{
+        let erro = await response.json()
+        alert(erro.msg)
+    }
+
+}
+
+async function excluirPrdImagem(img_codigo, prd_codigo){
+
+    if(confirm("Deseja mesmo excluir essa imagem?")){
+        const formData = new FormData();
+        formData.append('img_codigo', img_codigo)
+        formData.append('prd_codigo', prd_codigo)
+
+        const options = {
+            method: "POST",
+            body: formData
+        }
+
+        const url = `/admin/products/images/delete`
+
+        const response = await fetch(url, options);
+
+        if(response.ok){
+            alert("Imagem excluída!");
+
+            const data = await response.json()
+
+            carregarPrdImagens(data.imagens, prd_codigo);
+        }
+        else{
+            const erro = await response.json()
+            alert(erro.msg)
+        }
+    }
+
+}
+
+function carregarPrdImagens(imagens, prd_codigo){
+
+    let html = ""
+    for(const imagem of imagens){
+
+        html += `
+            <div class="prd-image-card col-sm-6 col-md-4 form-group">
+              <img class="prd-image-preview" alt="Imagem Indisponível" src="${imagem.img_caminho}">
+              <div class="prd-image-card-icons">
+                <i class="fas fa-trash-alt text-danger prd-image-icon" onclick="excluirPrdImagem(${imagem.img_codigo}, ${prd_codigo})"></i>
+              </div>
+            </div>
+        `
+
+    }
+
+    document.querySelector('#div_prd_imagens').innerHTML = html;
 
 }
 

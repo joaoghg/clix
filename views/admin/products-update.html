@@ -155,11 +155,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
           {loop="$imagens"}
             <div class="prd-image-card col-sm-6 col-md-4 form-group">
               <img class="prd-image-preview" alt="Imagem Indisponível" src="{$value.img_caminho}">
+              <div class="prd-image-card-icons">
+                <i class="fas fa-trash-alt text-danger prd-image-icon" onclick="excluirPrdImagem({$value.img_codigo}, {$produto.prd_codigo})"></i>
+              </div>
             </div>
           {/loop}
         </div>
         <div style="display: flex; justify-content: end">
-          <div class="col-sm-12">
+          <div class="col-xs-12">
             <label for="hd_prd_imagens_update" class="btn btn-block btn-success">Adicionar Imagens</label>
           </div>
         </div>
@@ -182,6 +185,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="/res/admin/dist/js/app.min.js"></script>
 
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/2e88bbdd15.js" crossorigin="anonymous"></script>
+
 <script src="/res/admin/functions.js"></script>
 <script src="/res/scripts/functions.js"></script>
 <script src="/res/scripts/produtos/produtos.js"></script>
@@ -191,7 +197,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   preencherArrayCategorias()
 
   const fileInputUpdate = document.getElementById('hd_prd_imagens_update');
-  fileInputUpdate.addEventListener('change', inserirImagem);
+  fileInputUpdate.addEventListener('change', () => inserirPrdImagem({$produto.prd_codigo}, event));
 </script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

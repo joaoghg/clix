@@ -142,17 +142,71 @@ class Products extends Model
 
     }
 
-    public static function saveImage($img_codigo)
+    public static function saveImage(array $imagens, $prd_codigo)
     {
 
+        $conn = new Sql();
 
+        for ($i = 0; $i < count($imagens['name']); $i++){
+
+            if(!is_dir($_SERVER['DOCUMENT_ROOT']."/res/template/img/produtos")){
+                mkdir($_SERVER['DOCUMENT_ROOT']."/res/template/img/produtos", 0777, true);
+            }
+
+            $parts = explode('.', $imagens['name'][$i]);
+
+            $extension = end($parts);
+
+            $img_path = "/res/template/img/produtos/img_{$prd_codigo}_$i.$extension";
+
+            if(move_uploaded_file($imagens['tmp_name'][$i], $_SERVER['DOCUMENT_ROOT'].$img_path)){
+
+                $sql = "
+                    INSERT INTO produto_imagens
+                    (prd_codigo, img_caminho)
+                    VALUES 
+                    (:prd_codigo, :img_caminho)
+                ";
+
+                $conn->query($sql, array(
+                    ":prd_codigo" => $prd_codigo,
+                    ":img_caminho" => $img_path
+                ));
+
+            }
+
+        }
 
     }
 
     public static function deleteImage($img_codigo)
     {
 
+        $conn = new Sql();
 
+        $sql = "
+            SELECT img_caminho
+            FROM produto_imagens
+            WHERE img_codigo = :img_codigo
+        ";
+
+        $result = $conn->select($sql, array("img_codigo" => $img_codigo));
+
+        $img_caminho = $result[0]['img_caminho'];
+
+        if( unlink($_SERVER['DOCUMENT_ROOT'].$img_caminho) ){
+
+            $sql = "
+                DELETE FROM produto_imagens
+                WHERE img_codigo = :img_codigo
+            ";
+
+            $conn->query($sql, array("img_codigo" => $img_codigo));
+
+        }
+        else{
+            throw new \Exception("Erro ao excluir imagem! Entre em contato com o Garnica imediatamente");
+        }
 
     }
 

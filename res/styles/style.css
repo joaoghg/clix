@@ -15,4 +15,26 @@
 
 .prd-image-card{
     height: 25rem;
+    margin-bottom: 2rem;
+}
+
+.prd-image-card-icons{
+    background-color: #DDD;
+    position: relative;
+    bottom: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prd-image-icon{
+    font-size: 2rem;
+    margin: 0.8rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.prd-image-icon:hover{
+    border: 1px solid black;
+    border-radius: 5px;
 }
