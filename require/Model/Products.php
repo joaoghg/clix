@@ -14,8 +14,10 @@ class Products extends Model
         $conn = new Sql();
 
         $sql = "
-            SELECT group_concat(( select cat_codigo from produto_categoria where prd_codigo = prd.prd_codigo )) categorias, prd.* 
+            SELECT prd.*, GROUP_CONCAT(cat.cat_codigo) AS categorias
             FROM produtos prd
+            INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
+            GROUP BY prd.prd_codigo
         ";
 
         return $conn->select($sql);
