@@ -281,4 +281,35 @@ class Products extends Model
 
     }
 
+    public static function delete($prd_codigo)
+    {
+
+        $conn = new Sql();
+
+        $sql = "
+            SELECT img_codigo 
+            FROM produto_imagens 
+            WHERE prd_codigo = :prd_codigo
+        ";
+
+        $results = $conn->select($sql, array( ":prd_codigo" => $prd_codigo ));
+
+        foreach ($results as $img){
+
+            self::deleteImage($img['img_codigo']);
+
+        }
+
+        $sql = "
+            DELETE FROM produto_categoria
+            WHERE prd_codigo = :prd_codigo;
+
+            DELETE FROM produtos
+            WHERE prd_codigo = :prd_codigo;
+        ";
+
+        $conn->query($sql, array( ":prd_codigo" => $prd_codigo ));
+
+    }
+
 }

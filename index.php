@@ -266,6 +266,10 @@ $app->get('/admin/products', function (){
 
     $products = Products::listAll();
 
+    if($products[0]['categorias'] === null){
+        $products = [];
+    }
+
     $page = new PageAdmin();
 
     $page->setTpl("products", array("products" => $products));
@@ -405,6 +409,44 @@ $app->post("/admin/products/images/create", function (){
     }
     header("Content-Type: application/json");
     exit(json_encode($retorno));
+});
+
+$app->get("/admin/products/images/create", function (){
+
+    User::verifyLogin();
+
+    extract($_POST);
+    extract($_FILES);
+
+    try{
+
+        Products::saveImage($imagens, $prd_codigo);
+
+        $imagens = Products::getImages($prd_codigo);
+
+        $retorno['status'] = true;
+        $retorno['imagens'] = $imagens;
+        http_response_code(200);
+    }catch(Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+});
+
+$app->get("/admin/products/{prd_codigo}/delete", function (Request $request, Response $response, array $args){
+
+    User::verifyLogin();
+
+    $prd_codigo = $args['prd_codigo'];
+
+    Products::delete($prd_codigo);
+
+    header("Location: /admin/products");
+    exit();
+
 });
 
 $app->run();

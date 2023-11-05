@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 2 | Starter</title>
+<title>ClixAdmin | Produtos</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.6 -->
@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <td>{$value.categorias}</td>
                           <td>
                             <a href="/admin/products/{$value.prd_codigo}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                            <a onclick="excluirProduto({$value.prd_codigo})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
+                            <a href="/admin/products/{$value.prd_codigo}/delete" onclick="return confirm('Deseja mesmo excluir esse produto?');" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                           </td>
                         </tr>
                         {/loop}
