@@ -33,20 +33,6 @@ function hidePlaceholder() {
     select.options[0].style.display = "none";
 }
 
-// botao Novo Endereco
-
-const botaoMostrar = document.getElementById('mostrar-caixa');
-        const caixaDialogo = document.getElementById('caixa-dialogo');
-        const botaoFechar = document.getElementById('fechar-caixa');
-
-        botaoMostrar.addEventListener('click', () => {
-            caixaDialogo.style.display = 'block';
-        });
-
-        botaoFechar.addEventListener('click', () => {
-            caixaDialogo.style.display = 'none';
-        });
-
 //Formatando campos de decimais
 function maskDecimal2(campo){
 
@@ -127,3 +113,35 @@ function abrirModal(id){
     $(`#${id}`).modal('show');
 
 }
+
+//Funções checkout
+
+async function buscaCep(){
+
+    const inputCep = document.querySelector('#cmp_checkout_cep')
+
+    if(inputCep.value.replace(/\D/, '').length < 8 ){
+        return
+    }
+
+    const cep = inputCep.value.replace(/\D/, '')
+
+    const url = `https://viacep.com.br/ws/${cep}/json`
+
+    const response = await fetch(url)
+
+    if(!response.ok){
+        return
+    }
+
+    const data = await response.json()
+
+    document.querySelector('#cmp_checkout_rua').value = data.logradouro
+    document.querySelector('#cmp_checkout_complemento').value = data.complemento
+    document.querySelector('#cmp_checkout_bairro').value = data.bairro
+    document.querySelector('#estados').value = data.uf
+    document.querySelector('#cmp_checkout_cidade').value = data.localidade
+
+}
+
+//

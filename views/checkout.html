@@ -80,50 +80,50 @@
                         </div>
                         <form>
                             <div class="group">
-                                <input required="" type="text" class="input1 input-disabled" onkeyup="cep1(event)"
-                                    maxlength="9" disabled>
+                                <input required="" type="text" class="input1" onkeyup="cep1(event)"
+                                    maxlength="9" oninput="buscaCep()" id="cmp_checkout_cep">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>CEP</label>
                             </div>
                             <div class="centralizacao-end">
                                 <div class="group tamanho-input">
-                                    <input required="" type="text" class="input1 input-disabled" disabled>
+                                    <input required="" type="text" class="input1" id="cmp_checkout_rua">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Rua</label>
                                 </div>
 
                                 <div class="group tamanho-input1">
-                                    <input required="" type="text" class="input1 input-disabled" disabled>
+                                    <input required="" type="text" class="input1">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Número</label>
                                 </div>
                             </div>
                             <div class="group">
-                                <input required="" type="text" class="input1 input-disabled" disabled>
+                                <input required="" type="text" class="input1" id="cmp_checkout_complemento">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Complemento</label>
                             </div>
                             <div class="group">
-                                <input required="" type="text" class="input1 input-disabled"
-                                    onkeyup="handlePhone(event)" maxlength="14" disabled>
+                                <input required="" type="text" class="input1"
+                                    onkeyup="handlePhone(event)" maxlength="14">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Telefone</label>
                             </div>
                             <div class="group">
-                                <input required="" type="text" class="input1 input-disabled"
-                                    oninput="this.value = this.value.replace(/\d/g, '')" disabled>
+                                <input required="" type="text" class="input1"
+                                    oninput="this.value = this.value.replace(/\d/g, '')" id="cmp_checkout_bairro">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Bairro</label>
                             </div>
                             <div class="centralizacao-end1 ">
                                 <div class="box">
-                                    <select id="estados" name="UF" class="input-disabled" onclick="hidePlaceholder()" disabled>
+                                    <select id="estados" name="UF" class=" onclick="hidePlaceholder()">
                                         <option value="">UF</option>
                                         <option value="AC">AC</option>
                                         <option value="AL">AL</option>
@@ -156,108 +156,14 @@
                                 </div>
 
                                 <div class="group tamanho-input">
-                                    <input required="" type="text" class="input1 input-disabled"
-                                        oninput="this.value = this.value.replace(/\d/g, '')" disabled>
+                                    <input required="" type="text" class="input1"
+                                        oninput="this.value = this.value.replace(/\d/g, '')" id="cmp_checkout_cidade">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Cidade</label>
                                 </div>
                             </div>
                         </form>
-                        <button id="mostrar-caixa" class="mostrarcaixa">Novo endereço</button>
-                        <div id="caixa-dialogo" class="escondido">
-                            <div class="conteudo">
-                                <svg id='fechar-caixa' xmlns="http://www.w3.org/2000/svg" height="1.4em"
-                                    viewBox="0 0 384 512"
-                                    class="close"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path
-                                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
-                                </svg>
-                                <div class="group">
-                                    <input required="" type="text" class="input1 " onkeyup="cep1(event)" maxlength="9">
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>CEP</label>
-                                </div>
-                                <div class="centralizacao-end">
-                                    <div class="group tamanho-input">
-                                        <input required="" type="text" class="input1">
-                                        <span class="highlight"></span>
-                                        <span class="bar"></span>
-                                        <label>Rua</label>
-                                    </div>
-
-                                    <div class="group tamanho-input1">
-                                        <input required="" type="text" class="input1">
-                                        <span class="highlight"></span>
-                                        <span class="bar"></span>
-                                        <label>Número</label>
-                                    </div>
-                                </div>
-                                <div class="group">
-                                    <input required="" type="text" class="input1">
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>Complemento</label>
-                                </div>
-                                <div class="group">
-                                    <input required="" type="text" class="input1" onkeyup="handlePhone(event)"
-                                        maxlength="14">
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>Telefone</label>
-                                </div>
-                                <div class="group">
-                                    <input required="" type="text" class="input1"
-                                        oninput="this.value = this.value.replace(/\d/g, '')">
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>Bairro</label>
-                                </div>
-                                <div class="centralizacao-end1">
-                                    <div class="box">
-                                        <select id="estados" name="UF" onclick="hidePlaceholder()">
-                                            <option value="">UF</option>
-                                            <option value="AC">AC</option>
-                                            <option value="AL">AL</option>
-                                            <option value="AP">AP</option>
-                                            <option value="AM">AM</option>
-                                            <option value="BA">BA</option>
-                                            <option value="CE">CE</option>
-                                            <option value="DF">DF</option>
-                                            <option value="ES">ES</option>
-                                            <option value="GO">GO</option>
-                                            <option value="MA">MA</option>
-                                            <option value="MT">MT</option>
-                                            <option value="MS">MS</option>
-                                            <option value="MG">MG</option>
-                                            <option value="PA">PA</option>
-                                            <option value="PB">PB</option>
-                                            <option value="PR">PR</option>
-                                            <option value="PE">PE</option>
-                                            <option value="PI">PI</option>
-                                            <option value="RJ">RJ</option>
-                                            <option value="RN">RN</option>
-                                            <option value="RS">RS</option>
-                                            <option value="RO">RO</option>
-                                            <option value="RR">RR</option>
-                                            <option value="SC">SC</option>
-                                            <option value="SP">SP</option>
-                                            <option value="SE">SE</option>
-                                            <option value="TO">TO</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="group tamanho-input">
-                                        <input required="" type="text" class="input1"
-                                            oninput="this.value = this.value.replace(/\d/g, '')">
-                                        <span class="highlight"></span>
-                                        <span class="bar"></span>
-                                        <label>Cidade</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!-- /Billing Details -->
 
@@ -354,13 +260,13 @@
     {include="footer"}
 
     <!-- jQuery Plugins -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/nouislider.min.js"></script>
-    <script src="js/jquery.zoom.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="res/scripts/functions.js"></script>
+    <script src="/res/template/js/jquery.min.js"></script>
+    <script src="/res/template/js/bootstrap.min.js"></script>
+    <script src="/res/template/js/slick.min.js"></script>
+    <script src="/res/template/js/nouislider.min.js"></script>
+    <script src="/res/template/js/jquery.zoom.min.js"></script>
+    <script src="/res/template/js/main.js"></script>
+    <script src="/res/scripts/functions.js"></script>
 </body>
 
 </html>
