@@ -170,6 +170,13 @@ $app->get('/checkout', function() {
     $page->setTpl("checkout");
 });
 
+$app->get('/cart', function() {
+
+    $page = new Page();
+
+    $page->setTpl("cart");
+});
+
 $app->get('/admin/categorias', function (){
 
     User::verifyLogin();

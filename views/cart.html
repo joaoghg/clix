@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>CliX! - Checkout</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/res/template/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/res/template/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/style.css" />
+
+</head>
+
+<body>
+
+
+    {include="header"}
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb" class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-cart" viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                    </svg>
+                    <h3 class="breadcrumb-header">Carrinho</h3>
+                    <i class="bi bi-cart"></i>
+                    <ul class="breadcrumb-tree">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">carrinho</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                
+                <!-- Order Details -->
+                <div class="col-md-5 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title">Seu Pedido</h3>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong>PRODUTO</strong></div>
+                            <div><strong>TOTAL</strong></div>
+                        </div>
+                        <div class="order-products">
+                            <div class="order-col">
+                                <div>1x Product Name Goes Here</div>
+                                <div>R$205,00</div>
+                            </div>
+                            <div class="order-col">
+                                <div>2x Product Name Goes Here</div>
+                                <div>R$205,00</div>
+                            </div>
+                        </div>
+                        <div class="order-col">
+                            <div>Frete</div>
+                            <div class="text-success"><strong>GRÁTIS</strong></div>
+                        </div>
+                        <div class="order-col cupom">
+                            <label for="cupom">Insira seu cupom</label>
+                            <input type="text" class="input">
+                        </div>
+                        <div class="order-col">
+                            <div><strong>TOTAL</strong></div>
+                            <div><strong class="order-total">R$410,00</strong></div>
+                        </div>
+
+                    </div>
+
+                    <a href="#" class="primary-btn order-submit">Ir para pagamento</a>
+                </div>
+                <!-- /Order Details -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+   
+    </div>
+    {include="footer"}
+
+    <!-- jQuery Plugins -->
+    <script src="/res/template/js/jquery.min.js"></script>
+    <script src="/res/template/js/bootstrap.min.js"></script>
+    <script src="/res/template/js/slick.min.js"></script>
+    <script src="/res/template/js/nouislider.min.js"></script>
+    <script src="/res/template/js/jquery.zoom.min.js"></script>
+    <script src="/res/template/js/main.js"></script>
+    <script src="/res/scripts/functions.js"></script>
+</body>
+
+</html>
