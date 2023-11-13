@@ -14,6 +14,7 @@
 
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="/res/template/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="/res/template/css/slick.css" />
@@ -21,6 +22,7 @@
 
     <!-- nouislider -->
     <link type="text/css" rel="stylesheet" href="/res/template/css/nouislider.min.css" />
+    
 
     <!-- Font Awesome Icon -->
     <link rel="stylesheet" href="/res/template/css/font-awesome.min.css">
@@ -62,56 +64,41 @@
 
     <!-- SECTION -->
     <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 order-details">
+                  <div class="section-title text-center">
+                      <h3 class="title">Seu Pedido</h3>
+                  </div>
+                  <div class="order-summary">
+                      
+                    <div class="cart-item">
+                      <img src="/res/template/img/product01.png" alt="Product Image">
+                      <div class="product-description">
+                          <p>Notebook para Jogos super Rápido</p>
+                      </div>
+                      <div class="quantity">
+                          <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                          <input type="text" class="quantity-input" value="1">
+                          <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                      </div>
+                      <div class="price" style="display: none;">
+                          R$2000,00
+                      </div>
+                      <div class="total-price">
+                          R$<span class="result-price">2000,00</span>
+                      </div>
+                      <button class="remove-btn" onclick="removeCartItem(this)"><i class="bi bi-trash-fill"></i></button>
+                  </div>
 
-                
-                <!-- Order Details -->
-                <div class="col-md-5 order-details">
-                    <div class="section-title text-center">
-                        <h3 class="title">Seu Pedido</h3>
-                    </div>
-                    <div class="order-summary">
-                        <div class="order-col">
-                            <div><strong>PRODUTO</strong></div>
-                            <div><strong>TOTAL</strong></div>
-                        </div>
-                        <div class="order-products">
-                            <div class="order-col">
-                                <div>1x Product Name Goes Here</div>
-                                <div>R$205,00</div>
-                            </div>
-                            <div class="order-col">
-                                <div>2x Product Name Goes Here</div>
-                                <div>R$205,00</div>
-                            </div>
-                        </div>
-                        <div class="order-col">
-                            <div>Frete</div>
-                            <div class="text-success"><strong>GRÁTIS</strong></div>
-                        </div>
-                        <div class="order-col cupom">
-                            <label for="cupom">Insira seu cupom</label>
-                            <input type="text" class="input">
-                        </div>
-                        <div class="order-col">
-                            <div><strong>TOTAL</strong></div>
-                            <div><strong class="order-total">R$410,00</strong></div>
-                        </div>
+                  <a href="#" class="primary-btn order-submit">Ir para pagamento</a>
+              </div>
+          </div>
+      </div>
+  </div>
 
-                    </div>
-
-                    <a href="#" class="primary-btn order-submit">Ir para pagamento</a>
-                </div>
-                <!-- /Order Details -->
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /SECTION -->
+</body>
+</html>
 
    
     </div>
@@ -125,6 +112,68 @@
     <script src="/res/template/js/jquery.zoom.min.js"></script>
     <script src="/res/template/js/main.js"></script>
     <script src="/res/scripts/functions.js"></script>
+
+
+    <script>
+      function decreaseQuantity(button) {
+    var input = button.nextElementSibling;
+    var currentValue = parseInt(input.value, 10);
+
+    if (currentValue > 1) {
+        input.value = currentValue - 1;
+    }
+}
+    function increaseQuantity(button) {
+        var input = button.previousElementSibling;
+        var currentValue = parseInt(input.value, 10);
+
+        input.value = currentValue + 1;
+    }
+    function decreaseQuantity(button) {
+    var input = button.nextElementSibling;
+    var quantity = parseInt(input.value, 10);
+
+    if (quantity > 1) {
+        input.value = quantity - 1;
+        updateTotalPrice(button.closest('.cart-item'));
+    }
+}
+
+// Função para aumentar a quantidade
+function increaseQuantity(button) {
+    var input = button.previousElementSibling;
+    var quantity = parseInt(input.value, 10);
+
+    input.value = quantity + 1;
+    updateTotalPrice(button.closest('.cart-item'));
+}
+
+// Função para atualizar o preço total do item
+function updateTotalPrice(cartItem) {
+    var quantity = parseInt(cartItem.querySelector('.quantity-input').value, 10);
+    var pricePerUnit = parseFloat(cartItem.querySelector('.price').innerText.replace('R$', '').replace(',', '.'));
+
+    var totalPrice = quantity * pricePerUnit;
+    cartItem.querySelector('.total-price').innerText = 'R$' + totalPrice.toFixed(2);
+
+    updateOrderTotal(); 
+}
+
+// Função para atualizar o preço total do pedido
+function updateOrderTotal() {
+    var totalPrice = 0;
+    var cartItems = document.querySelectorAll('.cart-item');
+
+    cartItems.forEach(function(cartItem) {
+        var quantity = parseInt(cartItem.querySelector('.quantity-input').value, 10);
+        var pricePerUnit = parseFloat(cartItem.querySelector('.price').innerText.replace('R$', '').replace(',', '.'));
+
+        totalPrice += quantity * pricePerUnit;
+    });
+
+    document.querySelector('.order-total').innerText = 'R$' + totalPrice.toFixed(2);
+}
+    </script>
 </body>
 
 </html>

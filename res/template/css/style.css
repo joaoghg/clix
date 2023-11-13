@@ -603,6 +603,79 @@ textarea.input {
   padding-bottom: 15px;
 }
 
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart-item img {
+  width: 50px; 
+  margin-right: 10px;
+}
+
+.product-description {
+  flex-grow: 1;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-btn {
+  background-color: #3498db; 
+  color: #fff; 
+  border: 1px solid #3498db; 
+  padding: 5px 10px; 
+  cursor: pointer;
+  height: 25px;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  border-radius: 5px;
+  display: flex;
+}
+
+.quantity-btn:hover {
+  background-color: #05253a; 
+  border-color: #000000; 
+}
+
+.quantity-input {
+  width: 40px;
+  text-align: center;
+}
+
+.price {
+  margin-left: 10px;
+}
+
+.order-submit {
+  margin-top: 20px;
+}
+.cart-item .price {
+  display: none; 
+}
+
+.remove-btn {
+  background-color: #e74c3c; 
+  color: #fff;
+  border: 1px solid #e74c3c; 
+  padding: 5px 10px;
+  cursor: pointer; 
+  height: 25px;
+  width: 23px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b; 
+  border-color: #c0392b; 
+}
 /*=========================================================
 	Wishlist
 ===========================================================*/
