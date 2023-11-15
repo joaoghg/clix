@@ -699,14 +699,20 @@ textarea.input {
   color: #ffffff;
 
 }
-.entrega{
+.titulo{
   align-items: center;
   display: flex;
 }
-.entrega img {
+.titulo img {
         margin-right: 10px;
 }
 
+.titulo svg {
+  margin-right: 10px;
+}
+.titulo .fa-heart-o {
+  margin-right: 10px;
+}
 
 /*=========================================================
 	Wishlist
