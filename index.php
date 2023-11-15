@@ -170,6 +170,13 @@ $app->get('/checkout', function() {
     $page->setTpl("checkout");
 });
 
+$app->get('/wishlist', function() {
+
+    $page = new Page();
+
+    $page->setTpl("wishlist");
+});
+
 $app->get('/cart', function() {
 
     $page = new Page();
