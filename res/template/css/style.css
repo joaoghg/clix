@@ -429,6 +429,15 @@ textarea.input {
     flex-wrap: wrap;
 }
 
+#coração_header {
+  transition: transform 0.3s ease; /* Transição suave de transformação */
+}
+
+#coração_header:hover {
+  transform: scaleX(-1); /* Girar horizontalmente ao passar o mouse */
+}
+
+
 /*----------------------------*\
 	Logo
 \*----------------------------*/
@@ -759,7 +768,7 @@ textarea.input {
 }
 
 .cart-btn_wishlist{
-  background-color: rgb(77, 201, 254); 
+  background-color: rgb(210, 4, 200); 
   color: #fff;
   border: 1px solid rgb(3, 37, 110); 
   padding: 5px 10px;
