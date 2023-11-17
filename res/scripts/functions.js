@@ -145,3 +145,25 @@ async function buscaCep(){
 }
 
 //
+
+//Funções carrinhos
+
+function adicionar_carrinho(){
+    window.open("/cart","_self")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//
+
+
+
