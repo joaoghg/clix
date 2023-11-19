@@ -132,64 +132,58 @@
 
 
     <script>
-      function decreaseQuantity(button) {
-    var input = button.nextElementSibling;
-    var currentValue = parseInt(input.value, 10);
+    // Função para diminuir a quantidade
+        function decreaseQuantity(button) {
+        var input = button.nextElementSibling;
+        var quantity = parseInt(input.value, 10);
 
-    if (currentValue > 1) {
-        input.value = currentValue - 1;
-    }
-}
-    function increaseQuantity(button) {
+        if (quantity > 1) {
+            input.value = quantity - 1;
+            updateTotalPrice(button.closest('.cart-item'));
+            }
+        }
+
+        // Função para aumentar a quantidade
+        function increaseQuantity(button) {
         var input = button.previousElementSibling;
-        var currentValue = parseInt(input.value, 10);
+        var quantity = parseInt(input.value, 10);
 
-        input.value = currentValue + 1;
-    }
-    function decreaseQuantity(button) {
-    var input = button.nextElementSibling;
-    var quantity = parseInt(input.value, 10);
-
-    if (quantity > 1) {
-        input.value = quantity - 1;
+        input.value = quantity + 1;
         updateTotalPrice(button.closest('.cart-item'));
-    }
-}
+        }
 
-// Função para aumentar a quantidade
-function increaseQuantity(button) {
-    var input = button.previousElementSibling;
-    var quantity = parseInt(input.value, 10);
-
-    input.value = quantity + 1;
-    updateTotalPrice(button.closest('.cart-item'));
-}
-
-// Função para atualizar o preço total do item
-function updateTotalPrice(cartItem) {
-    var quantity = parseInt(cartItem.querySelector('.quantity-input').value, 10);
-    var pricePerUnit = parseFloat(cartItem.querySelector('.price').innerText.replace('R$', '').replace(',', '.'));
-
-    var totalPrice = quantity * pricePerUnit;
-    cartItem.querySelector('.total-price').innerText = 'R$' + totalPrice.toFixed(2);
-
-    updateOrderTotal(); 
-}
-
-// Função para atualizar o preço total do pedido
-function updateOrderTotal() {
-    var totalPrice = 0;
-    var cartItems = document.querySelectorAll('.cart-item');
-
-    cartItems.forEach(function(cartItem) {
+        // Função para atualizar o preço total do item
+        function updateTotalPrice(cartItem) {
         var quantity = parseInt(cartItem.querySelector('.quantity-input').value, 10);
         var pricePerUnit = parseFloat(cartItem.querySelector('.price').innerText.replace('R$', '').replace(',', '.'));
 
-        totalPrice += quantity * pricePerUnit;
-    });
+        var totalPrice = quantity * pricePerUnit;
+        cartItem.querySelector('.total-price').innerText = 'R$' + totalPrice.toFixed(2);
 
-    document.querySelector('.order-total').innerText = 'R$' + totalPrice.toFixed(2);
-}
+        updateOrderTotal(); 
+        }
+
+        // Função para atualizar o preço total do pedido
+        function updateOrderTotal() {
+        var totalPrice = 0;
+        var cartItems = document.querySelectorAll('.cart-item');
+
+        cartItems.forEach(function(cartItem) {
+            var quantity = parseInt(cartItem.querySelector('.quantity-input').value, 10);
+            var pricePerUnit = parseFloat(cartItem.querySelector('.price').innerText.replace('R$', '').replace(',', '.'));
+
+            totalPrice += quantity * pricePerUnit;
+        });
+
+        document.querySelector('.order-total').innerText = 'R$' + totalPrice.toFixed(2);
+        }
+
+        // Adicionando ouvinte de eventos ao campo de quantidade
+        document.addEventListener('input', function(event) {
+        if (event.target.classList.contains('quantity-input')) {
+            updateTotalPrice(event.target.closest('.cart-item'));
+            }
+        });
     </script>
 </body>
 
