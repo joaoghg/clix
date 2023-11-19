@@ -23,9 +23,11 @@ $app = AppFactory::create();
 
 $app->get('/', function() {
 
+    $products = Products::listAll();
+
     $page = new Page();
 
-    $page->setTpl("index");
+    $page->setTpl("index", array("products" => $products));
 });
 
 
@@ -177,11 +179,19 @@ $app->get('/blank', function() {
     $page->setTpl("blank");
 });
 
-$app->get('/product', function() {
+$app->get('/product/{prd_codigo}', function(Request $request, Response $response, array $args) {
 
     $page = new Page();
 
-    $page->setTpl("product");
+    $product = Products::get($args['prd_codigo']);
+
+    $images = Products::getImages($args['prd_codigo']);
+
+    $categorias = Products::getCategorias($args['prd_codigo']);
+
+    $relateds = Products::getByCategorias($product['cat_codigos'], $args['prd_codigo']);
+
+    $page->setTpl("product", array("product" => $product, "images" => $images, "categorias" => $categorias, "relateds" => $relateds));
 });
 
 $app->get('/wishlist', function() {
@@ -474,6 +484,14 @@ $app->get("/admin/products/{prd_codigo}/delete", function (Request $request, Res
 
     header("Location: /admin/products");
     exit();
+
+});
+
+$app->get('/store', function (){
+    
+    $page = new Page();
+
+    $page->setTpl("store");
 
 });
 

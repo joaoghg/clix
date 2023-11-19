@@ -14,9 +14,15 @@ class Products extends Model
         $conn = new Sql();
 
         $sql = "
-            SELECT prd.*, GROUP_CONCAT(cat.cat_codigo) AS categorias
+            SELECT prd.*, img.img_caminho, GROUP_CONCAT(cat.cat_codigo) AS categorias,
+                    (SELECT cat_descricao 
+                     FROM categorias cat2
+                     INNER JOIN produto_categoria catp ON cat2.cat_codigo = catp.cat_codigo
+                     WHERE catp.prd_codigo = prd.prd_codigo
+                     LIMIT 1) prd_categoria
             FROM produtos prd
             INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
+            INNER JOIN produto_imagens img ON prd.prd_codigo = img.prd_codigo
             GROUP BY prd.prd_codigo
         ";
 
@@ -95,9 +101,12 @@ class Products extends Model
         $conn = new Sql();
 
         $sql = "
-            SELECT *
-            FROM produtos
-            WHERE prd_codigo = :prd_codigo
+            SELECT prd.*, GROUP_CONCAT(cat.cat_descricao) AS categorias, GROUP_CONCAT(catp.cat_codigo) AS cat_codigos
+            FROM produtos prd
+            INNER JOIN produto_categoria catp ON prd.prd_codigo = catp.prd_codigo
+            INNER JOIN categorias cat ON catp.cat_codigo = cat.cat_codigo
+            WHERE prd.prd_codigo = :prd_codigo
+            GROUP BY prd.prd_codigo
         ";
 
         $result = $conn->select($sql, array(
@@ -311,6 +320,30 @@ class Products extends Model
         ";
 
         $conn->query($sql, array( ":prd_codigo" => $prd_codigo ));
+
+    }
+
+    public static function getByCategorias($cat_codigos, $prd_codigo)
+    {
+
+        $conn = new Sql();
+
+        $sql = "
+            SELECT prd.*, img.img_caminho,
+                    (SELECT cat_descricao 
+                     FROM categorias cat2
+                     INNER JOIN produto_categoria catp ON cat2.cat_codigo = catp.cat_codigo
+                     WHERE catp.prd_codigo = prd.prd_codigo
+                     LIMIT 1) prd_categoria
+            FROM produtos prd
+            INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
+            INNER JOIN produto_imagens img ON prd.prd_codigo = img.prd_codigo
+            WHERE cat.cat_codigo IN (:cat_codigos)
+            AND prd.prd_codigo <> :prd_codigo
+            GROUP BY prd.prd_codigo
+        ";
+
+        return $conn->select($sql, array(":cat_codigos" => $cat_codigos, ":prd_codigo" => $prd_codigo));
 
     }
 
