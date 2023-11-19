@@ -177,6 +177,13 @@ $app->get('/blank', function() {
     $page->setTpl("blank");
 });
 
+$app->get('/pay', function() {
+
+    $page = new Page();
+
+    $page->setTpl("pay");
+});
+
 $app->get('/product', function() {
 
     $page = new Page();
