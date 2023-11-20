@@ -488,6 +488,8 @@ $app->get("/admin/products/{prd_codigo}/delete", function (Request $request, Res
 });
 
 $app->get('/store', function (){
+
+
     
     $page = new Page();
 
