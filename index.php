@@ -179,6 +179,13 @@ $app->get('/blank', function() {
     $page->setTpl("blank");
 });
 
+$app->get('/pagamento', function() {
+
+    $page = new Page();
+
+    $page->setTpl("pay");
+});
+
 $app->get('/product/{prd_codigo}', function(Request $request, Response $response, array $args) {
 
     $page = new Page();

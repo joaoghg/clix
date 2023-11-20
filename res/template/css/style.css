@@ -2411,6 +2411,10 @@ textarea.input {
   width: 30%;
 }
 
+.tamanho-input2 {
+  width: 50%;
+}
+
 .cupom {
   margin-top: 10px;
 }
@@ -2433,8 +2437,21 @@ textarea.input {
   border-bottom: 1px solid #515151;
   background: transparent;
 }
+.input2 {
+  font-size: 16px;
+  padding: 10px 10px 10px 10px;
+  display: block;
+  width: 100%;
+  border: solid 1px;
+  border-radius: 3px;
+  border-bottom: 1px solid #515151;
+  background: transparent;
+}
 
 .input1:focus {
+  outline: none;
+}
+.input2:focus {
   outline: none;
 }
 
@@ -2453,6 +2470,13 @@ textarea.input {
 
 .input1:focus~label,
 .input1:valid~label {
+  top: -20px;
+  font-size: 14px;
+  color: #5264AE;
+}
+
+.input2:focus~label,
+.input2.add-to-cart   ~label {
   top: -20px;
   font-size: 14px;
   color: #5264AE;
@@ -2598,4 +2622,98 @@ dropdown{
   width: 100px;
   height: 50px;
   display: flex;
+}
+
+
+.cartao{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+
+.btn-link{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: black;
+  font-size: 15px;
+  border-radius:  5px;
+  border: 1px solid;
+  padding: 10px 20px; 
+  width: 100%;
+  align-items: start;
+  display: flex;
+  text-decoration: none; 
+}
+
+.btn-link:hover{
+  background-color: #892be29a;
+  color: black;
+  text-decoration: none;
+}
+.btn-link:active{
+  background-color: #892be237;
+  color: black;
+  text-decoration: none;
+}
+.btn-link:focus{
+  background-color: #892be2f1;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+.pix{
+  width: 15px;
+  height: 15px;
+  align-self: center;
+  justify-content: end;
+  align-items: end;
+  display: flex;
+  background-color: white;
+  border-radius: 15px;
+  gap: 15px;
+  
+}
+.cartaocredito{
+  width: 70px;
+  height: 20px;
+  align-self: flex-end;
+  align-items: end;
+  display: block;
+  border-radius: 2px;
+  border: 1px;
+  gap: 5px;
+ 
+  
+}
+
+
+.card-body{
+  text-align: center; 
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+
+
+select#parcelamento {
+  background-color: #70179c;
+  color: rgb(255, 255, 255);
+  padding: 8px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+  width: 80%;
+  height: 50%;
+  border-radius: 5px;
+ 
+  
+}
+
+select#parcelamento option {
+  background-color: #ac05ff;
+  color: rgb(255, 255, 255);
+  height: 50%;
 }
