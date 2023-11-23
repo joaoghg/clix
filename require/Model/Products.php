@@ -359,7 +359,12 @@ class Products extends Model
                      LIMIT 1) prd_categoria
             FROM produtos prd
             INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
-            WHERE cat.cat_descricao = :cat_descricao
+            WHERE (SELECT COUNT(*) 
+                   FROM produto_categoria
+                   WHERE prd_codigo = prd.prd_codigo
+                   AND cat_codigo = (SELECT cat_codigo
+                                     FROM categorias
+                                     WHERE cat_descricao = :cat_descricao)) > 0
             GROUP BY prd.prd_codigo
         ";
 
