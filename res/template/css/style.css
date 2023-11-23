@@ -666,8 +666,8 @@ textarea.input {
 
 .order-submit {
   margin-top: 20px;
-  width: 300px;
 }
+
 .cart-item .price {
   display: none; 
 }
@@ -2388,6 +2388,17 @@ textarea.input {
   display: flex;
 }
 
+.colun {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+
+.centralizar-titulo a {
+  margin-right: 5px;
+}
+
 .centralizar-titulo svg {
   margin-right: 5px;
 }
@@ -2421,6 +2432,10 @@ textarea.input {
 
 .order-notes {
   margin-bottom: 30px;
+}
+
+.eaes {
+  margin-bottom: 10px;
 }
 
 .group {
@@ -2694,6 +2709,30 @@ dropdown{
   margin-bottom: 10px;
 }
 
+.card-body p {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.avancar {
+  width: 17%;
+  padding: 8px;
+}
+
+@media only screen and (max-width: 767px) {
+  .avancar {
+    width: 32%;
+  }
+  .card-body p {
+    font-size: 12px;
+    text-align: justify;
+  }
+}
+
+.card {
+  margin-bottom: 10px;
+}
 
 select#parcelamento {
   background-color: #70179c;
