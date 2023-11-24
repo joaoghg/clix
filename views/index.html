@@ -162,28 +162,28 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="hot-deal">
-							<ul class="hot-deal-countdown">
+							<ul id="countdown" class="hot-deal-countdown">
 								<li>
 									<div>
-										<h3>02</h3>
+										<h3 id="days">01</h3>
 										<span>Dias</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>10</h3>
+										<h3 id="hours">10</h3>
 										<span>Horas</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>34</h3>
+										<h3 id="minutes">34</h3>
 										<span>Min</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>60</h3>
+										<h3 id="seconds">60</h3>
 										<span>Seg</span>
 									</div>
 								</li>
@@ -312,3 +312,38 @@
 <script src="/res/template/js/jquery.zoom.min.js"></script>
 <script src="/res/template/js/main.js"></script>
 <script src="/res/scripts/functions.js"></script>
+
+
+<script>
+    // Função para iniciar o contador regressivo
+    function startCountdown() {
+        var endDate = new Date(2023, 11, 15, 23, 59, 59);
+
+        function updateCountdown() {
+            var now = new Date();
+            var timeDifference = endDate - now;
+
+            if (timeDifference > 0) {
+                var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                // Atualiza os elementos HTML
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                console.log('Contador chegou a zero!');
+                clearInterval(intervalId);
+            }
+        }
+
+        var intervalId = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    }
+
+    // Inicia o contador quando a página carregar
+    window.onload = startCountdown;
+</script>
