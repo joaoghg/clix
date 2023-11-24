@@ -494,13 +494,6 @@ $app->get("/admin/products/{prd_codigo}/delete", function (Request $request, Res
 
 });
 
-$app->get('/registro', function() {
-
-    $page = new Page();
-
-    $page->setTpl("register");
-});
-
 $app->get('/login', function() {
 
     $page = new Page();
