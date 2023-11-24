@@ -10,6 +10,8 @@ Agora no projeto, é necessário instalar o composer pelo navegador, e no termin
 Para que o projeto funcione corretamente, crie um arquivo .env na raiz do projeto preenchendo as chaves que existem no arquivo .env.example.
 Crie também na raiz do projeto uma pasta chamada views-cache, que será utilizada pelo raintTpl.
 
+Além disso, na raiz do projeto existe um arquivo chamado ecommerce.sql, rode esse arquivo no MySQL para criar o banco de dados do projeto. Um usuário padrão para a parte de administração será criado junto com o banco, sendo o login = admin e a senha = admin
+
 Nesse projeto foi utilizado o slim framework para criação das API e estruturação das rotas do projeto dentro do arquivo index.php, exemplo:
 
 Definindo o framework;
