@@ -494,6 +494,13 @@ $app->get("/admin/products/{prd_codigo}/delete", function (Request $request, Res
 
 });
 
+$app->get('/registro', function() {
+
+    $page = new Page();
+
+    $page->setTpl("register");
+});
+
 $app->get('/store[/{categoria}]', function (Request $request, Response $response, array $args){
 
     if(isset($args['categoria'])){
@@ -507,8 +514,16 @@ $app->get('/store[/{categoria}]', function (Request $request, Response $response
     
     $page = new Page();
 
-    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias));
+    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias, "filtro" => $args['categoria']));
 
 });
+
+/*$app->post('/store', function(){
+
+    $page = new Page();
+
+    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias, "filtro" => $args['categoria']));
+
+});*/
 
 $app->run();

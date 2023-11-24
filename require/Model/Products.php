@@ -322,10 +322,19 @@ class Products extends Model
 
     }
 
-    public static function getByCategorias($cat_codigos, $prd_codigo)
+    public static function getByCategorias($cat_codigos, $prd_codigo = 0)
     {
 
         $conn = new Sql();
+
+        $dados = [];
+        $dados[':cat_codigo'] = $cat_codigos;
+
+        $and = "";
+        if($prd_codigo != 0){
+            $and .= "AND prd.prd_codigo <> :prd_codigo";
+            $dados[':prd_codigo'] = $prd_codigo;
+        }
 
         $sql = "
             SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho,
@@ -337,11 +346,11 @@ class Products extends Model
             FROM produtos prd
             INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
             WHERE cat.cat_codigo IN (:cat_codigos)
-            AND prd.prd_codigo <> :prd_codigo
+            $and
             GROUP BY prd.prd_codigo
         ";
 
-        return $conn->select($sql, array(":cat_codigos" => $cat_codigos, ":prd_codigo" => $prd_codigo));
+        return $conn->select($sql, $dados);
 
     }
 

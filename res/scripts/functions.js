@@ -165,5 +165,24 @@ function adicionar_carrinho(){
 
 //
 
+function filtrarProdutos(){
 
+    const formData = new FormData()
+
+    document.querySelectorAll('.chkCat:checked').forEach(function(chk){
+
+        formData.append('categorias[]', chk.value)
+
+    })
+
+    const options = {
+        method: "POST",
+        body: formData
+    }
+
+    const url = "/store";
+
+    fetch(url, options)
+
+}
 
