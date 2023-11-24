@@ -30,3 +30,5 @@ Criação da Rota;
     
     $page->setTpl("index", array("products" => $products));
 });
+
+O arquivo zip contém alguns arquivos de tabelas que devem ser importadas no banco de dados, além de uma pasta com imagens. Estas imagens devem ser colocadas na pasta res/template/img/produtos. Caso a pasta não exista, crie.
