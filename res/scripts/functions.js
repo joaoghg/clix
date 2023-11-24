@@ -222,3 +222,23 @@ async function filtrarProdutos(){
     }
 
 }
+
+async function addWishlist(prd_codigo){
+
+    let produtos = JSON.parse(localStorage.getItem('wishlist')) || {}
+
+    produtos[prd_codigo] = prd_codigo
+
+    localStorage.setItem('wishlist', JSON.stringify(produtos))
+
+    countWishlist()
+
+}
+
+function countWishlist(){
+
+    let produtos = JSON.parse(localStorage.getItem('wishlist')) || {}
+
+    document.querySelector('#qtd_wishlist').innerHTML = Object.keys(produtos).length
+
+}

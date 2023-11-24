@@ -32,7 +32,7 @@
                             <a href="/wishlist">
                                 <i id="coração_header" class="fa fa-heart-o"></i>
                                 <span>Favoritos</span>
-                                <div class="qty">2</div>
+                                <div class="qty" id="qtd_wishlist"></div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
@@ -119,3 +119,11 @@
       
     </nav>
 </header>
+
+<script>
+
+    let produtos = JSON.parse(localStorage.getItem('wishlist')) || {}
+
+    document.querySelector('#qtd_wishlist').innerHTML = Object.keys(produtos).length
+
+</script>
