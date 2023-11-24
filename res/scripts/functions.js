@@ -293,3 +293,114 @@ function removerWishlist(prd_codigo){
     carregarProdutosWishlist()
 
 }
+
+async function loginUser(){
+    const login = document.querySelector('#user_login').value
+
+    if(String(login).trim() === ""){
+        alert("Informe o login!")
+        return
+    }
+
+    const password = document.querySelector('#user_password').value
+
+    if(String(password).trim() === ""){
+        alert("Informe a senha!")
+        return
+    }
+
+    const data = {
+        login: login,
+        password: password
+    }
+
+    const url = "/login"
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    const response = await fetch(url, options)
+
+    if(response.ok){
+        window.open('/', '_self')
+    }
+    else{
+        const erro = await response.json()
+        alert(erro.msg)
+    }
+}
+
+async function cadastrarUsuario(){
+
+    const erro = validar_campos('user_nome_cad', 'user_login_cad', 'user_senha_cad');
+
+    if(erro === 1){
+        return
+    }
+
+    limpar_validacao();
+
+    const ps_nome    = document.querySelector('#user_nome_cad').value
+    const user_login = document.querySelector('#user_login_cad').value
+    const user_senha = document.querySelector('#user_senha_cad').value
+    const user_admin = 0
+
+    const url = '/users/create'
+
+    const data = {
+        ps_nome     : ps_nome,
+        user_senha  : user_senha,
+        user_admin  : user_admin,
+        user_login  : user_login
+    }
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    const response = await fetch(url, options)
+
+    if(response.ok){
+        alert("Usuário cadastrado! Faça o login.")
+        window.open('/login', '_self')
+    }
+    else{
+        const erro = await response.json()
+        alert(erro.msg)
+    }
+
+}
+
+async function addCart(prd_codigo){
+    const url = '/addCart'
+
+    const data = {
+        prd_codigo : prd_codigo
+    }
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    const response = await fetch(url, options)
+
+    if(response.ok){
+
+        const data = await response.json()
+
+        document.querySelector('#qtd_cart').innerHTML = data.qtdCart
+    }
+}
