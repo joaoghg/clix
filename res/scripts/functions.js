@@ -395,12 +395,5 @@ async function addCart(prd_codigo){
         body: JSON.stringify(data)
     }
 
-    const response = await fetch(url, options)
-
-    if(response.ok){
-
-        const data = await response.json()
-
-        document.querySelector('#qtd_cart').innerHTML = data.qtdCart
-    }
+    await fetch(url, options)
 }
