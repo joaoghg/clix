@@ -494,14 +494,36 @@ $app->get("/admin/products/{prd_codigo}/delete", function (Request $request, Res
 
 });
 
-$app->get('/store', function (){
+$app->get('/registro', function() {
 
+    $page = new Page();
 
+    $page->setTpl("register");
+});
+
+$app->get('/store[/{categoria}]', function (Request $request, Response $response, array $args){
+
+    if(isset($args['categoria'])){
+        $produtos = Products::getByCatDescricao($args['categoria']);
+    }
+    else{
+        $produtos = Products::listAll();
+    }
+
+    $categorias = Categoria::listAll();
     
     $page = new Page();
 
-    $page->setTpl("store");
+    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias, "filtro" => $args['categoria']));
 
 });
+
+/*$app->post('/store', function(){
+
+    $page = new Page();
+
+    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias, "filtro" => $args['categoria']));
+
+});*/
 
 $app->run();

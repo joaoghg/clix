@@ -14,7 +14,7 @@ class Products extends Model
         $conn = new Sql();
 
         $sql = "
-            SELECT prd.*, img.img_caminho, GROUP_CONCAT(cat.cat_codigo) AS categorias,
+            SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho, GROUP_CONCAT(cat.cat_codigo) AS categorias,
                     (SELECT cat_descricao 
                      FROM categorias cat2
                      INNER JOIN produto_categoria catp ON cat2.cat_codigo = catp.cat_codigo
@@ -22,7 +22,6 @@ class Products extends Model
                      LIMIT 1) prd_categoria
             FROM produtos prd
             INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
-            INNER JOIN produto_imagens img ON prd.prd_codigo = img.prd_codigo
             GROUP BY prd.prd_codigo
         ";
 
@@ -323,13 +322,22 @@ class Products extends Model
 
     }
 
-    public static function getByCategorias($cat_codigos, $prd_codigo)
+    public static function getByCategorias($cat_codigos, $prd_codigo = 0)
     {
 
         $conn = new Sql();
 
+        $dados = [];
+        $dados[':cat_codigo'] = $cat_codigos;
+
+        $and = "";
+        if($prd_codigo != 0){
+            $and .= "AND prd.prd_codigo <> :prd_codigo";
+            $dados[':prd_codigo'] = $prd_codigo;
+        }
+
         $sql = "
-            SELECT prd.*, img.img_caminho,
+            SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho,
                     (SELECT cat_descricao 
                      FROM categorias cat2
                      INNER JOIN produto_categoria catp ON cat2.cat_codigo = catp.cat_codigo
@@ -337,13 +345,39 @@ class Products extends Model
                      LIMIT 1) prd_categoria
             FROM produtos prd
             INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
-            INNER JOIN produto_imagens img ON prd.prd_codigo = img.prd_codigo
             WHERE cat.cat_codigo IN (:cat_codigos)
-            AND prd.prd_codigo <> :prd_codigo
+            $and
             GROUP BY prd.prd_codigo
         ";
 
-        return $conn->select($sql, array(":cat_codigos" => $cat_codigos, ":prd_codigo" => $prd_codigo));
+        return $conn->select($sql, $dados);
+
+    }
+
+    public static function getByCatDescricao($cat_descricao)
+    {
+
+        $conn = new Sql();
+
+        $sql = "
+            SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho,
+                    (SELECT cat_descricao 
+                     FROM categorias cat2
+                     INNER JOIN produto_categoria catp ON cat2.cat_codigo = catp.cat_codigo
+                     WHERE catp.prd_codigo = prd.prd_codigo
+                     LIMIT 1) prd_categoria
+            FROM produtos prd
+            INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
+            WHERE (SELECT COUNT(*) 
+                   FROM produto_categoria
+                   WHERE prd_codigo = prd.prd_codigo
+                   AND cat_codigo = (SELECT cat_codigo
+                                     FROM categorias
+                                     WHERE cat_descricao = :cat_descricao)) > 0
+            GROUP BY prd.prd_codigo
+        ";
+
+        return $conn->select($sql, array(":cat_descricao" => $cat_descricao));
 
     }
 
