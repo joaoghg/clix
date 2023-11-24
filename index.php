@@ -501,6 +501,13 @@ $app->get('/registro', function() {
     $page->setTpl("register");
 });
 
+$app->get('/login', function() {
+
+    $page = new Page();
+
+    $page->setTpl("login_user");
+});
+
 $app->get('/store[/{categoria}]', function (Request $request, Response $response, array $args){
 
     if(isset($args['categoria'])){
