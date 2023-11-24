@@ -5,7 +5,7 @@
             <!-- row -->
             <div class="row header-row">
                 <!-- LOGO -->
-                <div class="col-sm-3 col-xs-12 header-responsive">
+                <div class="col-sm-2 col-xs-12 header-responsive">
                     <div class="header-logo">
                         <a href="/" class="logo">
                             <!--<img src="/res/template/img/logo.png" alt="">-->
@@ -27,7 +27,7 @@
                 <!-- /SEARCH BAR -->
 
                 <!-- ACCOUNT -->
-                <div class="col-xs-5 col-sm-3 header-responsive" style="display: flex; justify-content: center">
+                <div class="col-xs-5 col-sm-4 header-responsive" style="display: flex; justify-content: center">
                     <div class="header-ctn">
                         <!-- Wishlist -->
                        <div id="div_wishlist">
@@ -82,6 +82,44 @@
                         </div>
                         <!-- /Cart -->
 
+                        <!-- User -->
+                        <div class="dropdown" id="div_conta">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-user"></i>
+                                <span>Conta</span>
+                            </a>
+                            <div class="cart-dropdown">
+                                <div class="cart-list">
+                                    <div class="product-widget">
+                                        <div class="product-img">
+                                            <img src="/res/template/img/product01.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                            <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                        </div>
+                                        <button class="delete"><i class="fa fa-close"></i></button>
+                                    </div>
+
+                                    <div class="product-widget">
+                                        <div class="product-img">
+                                            <img src="/res/template/img/product02.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                            <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+                                        </div>
+                                        <button class="delete"><i class="fa fa-close"></i></button>
+                                    </div>
+                                </div>
+                                <div class="cart-btns">
+                                    <a href="/cart">Meus pedidos</a>
+                                    <a href="/checkout">Logout <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /User -->
+
                         <!-- Menu Toogle -->
                         <div class="menu-toggle">
                             <a href="#">
@@ -112,6 +150,7 @@
                     <li><a href="/store/tablets">Tablets</a></li>
                     <li><a href="/store/cameras">Cameras</a></li>
                     <li><a href="/store/fones">Fones</a></li>
+                    <li><a class="menu-li-conta">Conta</a></li>
                 </ul>
                 <!-- /NAV -->
             </div>

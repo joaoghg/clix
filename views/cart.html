@@ -68,7 +68,7 @@
           <div class="row">
               <div class="col-md-12 order-details">
                   <div class="section-title text-center">
-                      <h3 class="title">Seu Pedido</h3>
+                      <h3 class="title">Itens</h3>
                   </div>
                   <div class="order-summary">
                       
@@ -89,34 +89,27 @@
                           R$<span class="result-price">2000,00</span>
                       </div>
                       <button class="remove-btn" onclick="removeCartItem(this)"><i class="bi bi-trash-fill"></i></button>
+                    </div>
+                    <div class="total-price">
+                      R$2000,00
+                    </div>
                   </div>
-                  <div class="total-price">
-                    R$2000,00
-                </div>
-            </div>
+              </div>
             
             <div class="order-col">
                 <div>Frete</div>
                 <div class="text-success"><strong>GRÁTIS</strong></div>
-            </div>
-            <div class="order-col cupom">
-                <label for="cupom">Insira seu cupom</label>
-                <input type="text" class="input">
             </div>
             <div class="order-col">
                 <div><strong>TOTAL</strong></div>
                 <div><strong class="order-total total-price">R$2000,00</strong></div>
                 <div class="container-botoes">
                     <a href="/" class="primary-btn order-submit mr-2 btn_voltar_comprar">Continuar Comprando</a>
-                    <a href="#" class="primary-btn order-submit ">Ir para pagamento</a>
+                    <a href="/pagamento" class="primary-btn order-submit ">Ir para pagamento</a>
                 </div>
           </div>
       </div>
   </div>
-
-</body>
-</html>
-
    
     </div>
     {include="footer"}
@@ -186,5 +179,4 @@
         });
     </script>
 </body>
-
 </html>

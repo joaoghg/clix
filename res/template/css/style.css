@@ -877,6 +877,9 @@ textarea.input {
   #div_wishlist{
     display: none;
   }
+  #div_conta{
+    display: none;
+  }
   .header-ctn{
     display: flex;
   }
@@ -953,6 +956,12 @@ textarea.input {
 .shop .shop-body .cta-btn {
   color: #FFF;
   text-transform: uppercase;
+}
+
+@media only screen and (min-width: 991px){
+  .menu-li-conta{
+    display: none !important;
+  }
 }
 
 /*=========================================================

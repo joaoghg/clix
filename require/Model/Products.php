@@ -349,7 +349,7 @@ class Products extends Model
         $conn = new Sql();
 
         $dados = [];
-        $dados[':cat_codigo'] = $cat_codigos;
+        $dados[':cat_codigos'] = $cat_codigos;
 
         $and = "";
         if($prd_codigo != 0){
