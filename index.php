@@ -647,4 +647,23 @@ $app->post('/addCart', function (){
 
 });
 
+$app->get('/getCart', function() {
+
+    try{
+
+        $produtos = Cart::get();
+
+        http_response_code(201);
+        $retorno['produtos'] = $produtos;
+        $retorno['status'] = true;
+    }catch(\Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
+});
+
 $app->run();

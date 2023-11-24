@@ -72,4 +72,26 @@ class Cart extends Model
 
     }
 
+    public static function get()
+    {
+
+        if(empty($_SESSION['user'])){
+            return [];
+        }
+        else{
+
+            $conn = new Sql();
+
+            $sql = "
+                SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho
+                FROM produtos prd
+                INNER JOIN produtos_carrinho prdc ON prdc.prd_codigo = prd.prd_codigo
+            ";
+
+            return $conn->select($sql);
+
+        }
+
+    }
+
 }
