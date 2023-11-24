@@ -16,6 +16,7 @@ use Page\Page;
 use Model\User;
 use Model\Categoria;
 use Model\Products;
+use Model\Cart;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -27,7 +28,12 @@ $app->get('/', function() {
 
     $page = new Page();
 
-    $page->setTpl("index", array("products" => $products));
+    $dados['products'] = $products;
+    if(isset($_SESSION['user'])){
+        $dados['user'] = $_SESSION['user'];
+    }
+
+    $page->setTpl("index", $dados);
 });
 
 
@@ -569,6 +575,75 @@ $app->post('/store/buscar', function(){
     $page = new Page();
 
     $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias));
+
+});
+
+$app->post('/login', function() {
+
+    try{
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        User::login($data['login'], $data['password']);
+
+        http_response_code(200);
+        $retorno['status'] = true;
+    }catch(\Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
+});
+
+$app->get('/logout', function (){
+
+    User::logout();
+
+    header("Location: /login");
+    exit;
+});
+
+$app->post('/users/create', function (){
+
+    try{
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        User::save($data['ps_nome'], $data['user_senha'], "", "", $data['user_login'], $data['user_admin']);
+
+        http_response_code(201);
+        $retorno['status'] = true;
+    }catch(\Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
+});
+
+$app->post('/addCart', function (){
+
+    try{
+
+        User::verifyLoginUser();
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        Cart::add($data['prd_codigo']);
+
+        http_response_code(201);
+        $retorno['status'] = true;
+    }catch(\Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
 
 });
 

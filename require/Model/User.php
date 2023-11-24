@@ -57,6 +57,19 @@ class User extends Model
 
     }
 
+    public static function verifyLoginUser()
+    {
+
+        if( !isset($_SESSION[User::SESSION])
+            || !$_SESSION[User::SESSION]
+            || !(int)$_SESSION[User::SESSION]['user_codigo'] > 0)
+        {
+            header("Location: /login");
+            exit;
+        }
+
+    }
+
     public static function logout()
     {
         $_SESSION[User::SESSION] = null;

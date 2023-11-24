@@ -54,20 +54,20 @@
                 <form class="main-form">
                     <label class="label-input-main" for="">
                         <i class="far fa-user icon-modify-main"></i>
-                        <input type="text" placeholder="Nome" required>
+                        <input type="text" id="user_nome_cad" placeholder="Nome" required>
                     </label>
 
                     <label class="label-input-main" for="">
                         <i class="far fa-envelope icon-modify-main"></i>
-                        <input type="email" placeholder="Email" required>
+                        <input type="text" placeholder="Login" id="user_login_cad" required>
                     </label>
 
                     <label class="label-input-main" for="">
                         <i class="fas fa-lock icon-modify-main"></i>
-                        <input type="password" placeholder="Senha" required>
+                        <input type="password" id="user_senha_cad" placeholder="Senha" required>
                     </label>
 
-                    <a href="/" class="btn-main btn-second">Registrar</a>
+                    <a class="btn-main btn-second" onclick="cadastrarUsuario()">Registrar</a>
                 </form>
             </div><!-- second column -->
         </div><!-- first content -->
@@ -80,31 +80,26 @@
             </div>
             <div class="second-col">
                 <h2 class="main-title title-second">Login</h2>
-                <p class="main-description description-second">Insira seu email e senha</p>
+                <p class="main-description description-second">Insira seu login e senha</p>
                 <form class="main-form">
 
                     <label class="label-input-main" for="">
                         <i class="far fa-envelope icon-modify-main"></i>
-                        <input type="email" placeholder="Email" required>
+                        <input type="text" id="user_login" placeholder="Login" required>
                     </label>
 
                     <label class="label-input-main" for="">
                         <i class="fas fa-lock icon-modify-main"></i>
-                        <input type="password" placeholder="Senha" required>
+                        <input type="password" id="user_password" placeholder="Senha" required>
                     </label>
 
-                    <a href="/" class="btn-main btn-second" onclick="loginAdmin()">Entrar</a>
+                    <a class="btn-main btn-second" onclick="loginUser()">Entrar</a>
                 </form>
             </div><!-- second column -->
         </div><!-- second-content -->
     </div>
 
     {include="footer"}
-
-
-
-
-
 
 
     <!-- jQuery Plugins -->
