@@ -8,10 +8,28 @@ use Model;
 class Products extends Model
 {
 
-    public static function listAll()
+    public static function listAll($categorias = [], $preco_minimo = "", $preco_maximo = "")
     {
 
         $conn = new Sql();
+
+        $dados = [];
+
+        $and = "";
+        if(count($categorias) > 0){
+
+            $cat_codigos = implode(',', $categorias);
+
+            $and .= "AND cat.cat_codigo IN ($cat_codigos)";
+        }
+        if($preco_minimo != ""){
+            $and .= " AND prd.prd_preco >= :preco_min";
+            $dados[':preco_min'] = $preco_minimo;
+        }
+        if($preco_maximo != ""){
+            $and .= " AND prd.prd_preco <= :preco_max";
+            $dados[':preco_max'] = $preco_maximo;
+        }
 
         $sql = "
             SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho, GROUP_CONCAT(cat.cat_codigo) AS categorias,
@@ -22,10 +40,12 @@ class Products extends Model
                      LIMIT 1) prd_categoria
             FROM produtos prd
             INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
+            WHERE 1 = 1
+            $and
             GROUP BY prd.prd_codigo
         ";
 
-        return $conn->select($sql);
+        return $conn->select($sql, $dados);
 
     }
 

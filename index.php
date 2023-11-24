@@ -518,12 +518,28 @@ $app->get('/store[/{categoria}]', function (Request $request, Response $response
 
 });
 
-/*$app->post('/store', function(){
+$app->post('/store', function(){
 
-    $page = new Page();
+    extract($_POST);
 
-    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias, "filtro" => $args['categoria']));
+    try{
 
-});*/
+        if(!isset($categorias)){
+            $categorias = [];
+        }
+
+        $produtos = Products::listAll($categorias, $preco_min, $preco_max);
+
+        $retorno['produtos'] = $produtos;
+        http_response_code(200);
+    }catch(Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
+});
 
 $app->run();

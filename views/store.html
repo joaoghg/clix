@@ -64,11 +64,11 @@
 					<h3 class="aside-title">Price</h3>
 					<div class="price-filter">
 						<div class="input-number price-min">
-							<input id="price-min" type="number" value="0">
+							<input id="price-min" type="number" value="0" onblur="filtrarProdutos()">
 						</div>
 						<span>-</span>
 						<div class="input-number price-max">
-							<input id="price-max" type="number" value="1000000">
+							<input id="price-max" type="number" value="1000000" onblur="filtrarProdutos()">
 						</div>
 					</div>
 				</div>
@@ -137,7 +137,7 @@
 			<div id="store" class="col-md-9">
 
 				<!-- store products -->
-				<div style="display:flex; flex-wrap: wrap">
+				<div style="display:flex; flex-wrap: wrap" id="div_produtos_store">
 
 					{loop="$produtos"}
 						<!-- product -->
@@ -149,7 +149,7 @@
 								<div class="product-body">
 									<p class="product-category">{$value.prd_categoria}</p>
 									<h3 class="product-name"><a href="/product/{$value.prd_codigo}">{$value.prd_descricao}</a></h3>
-									<h4 class="product-price">R$ {function="number_format($value.prd_preco, 2, ',', '.')"} </h4>
+									<h4 class="product-price">R$ {function="number_format($value.prd_preco, 2, ',', '')"} </h4>
 									<div class="product-rating">
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>

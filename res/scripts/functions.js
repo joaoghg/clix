@@ -164,6 +164,9 @@ async function filtrarProdutos(){
 
     })
 
+    formData.append('preco_min', document.querySelector('#price-min').value)
+    formData.append('preco_max', document.querySelector('#price-max').value)
+
     const options = {
         method: "POST",
         body: formData
@@ -171,6 +174,51 @@ async function filtrarProdutos(){
 
     const url = "/store";
 
-    await fetch(url, options)
+    const response = await fetch(url, options)
+
+    if(response.ok){
+
+        const data = await response.json()
+
+        let html = ''
+        data.produtos.forEach((prd) => {
+
+            html += `
+                <div class="col-md-4 col-xs-6">
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="${prd.img_caminho}" alt="">
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">${prd.prd_categoria}</p>
+                            <h3 class="product-name"><a href="/product/${prd.prd_codigo}">${prd.prd_descricao}</a></h3>
+                            <h4 class="product-price">R$ ${prd.prd_preco.replace('.', ',')} </h4>
+                            <div class="product-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-btns">
+                                <button class="add-to-wishlist" onclick="addWishlist(${prd.prd_codigo})"><i class="fa fa-heart-o"></i><span class="tooltipp">adicionar aos favoritos</span></button>
+                            </div>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="add-to-cart-btn" onclick="addCart(${prd.prd_codigo})"><i class="fa fa-shopping-cart"></i> adicionar ao carrinho</button>
+                        </div>
+                    </div>
+                </div>
+            `
+
+        })
+
+        document.querySelector('#div_produtos_store').innerHTML = html
+
+    }
+    else{
+        const erro = await response.json()
+        alert(erro.msg)
+    }
 
 }
