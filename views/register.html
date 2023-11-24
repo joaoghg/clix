@@ -41,10 +41,10 @@
             <!-- row -->
             <div class="row">
                 <div class="col-md-12 titulo">
-                    <h3 class="breadcrumb-header">Registro</h3>
+                    <h3 class="breadcrumb-header">MEUS PEDIDOS</h3>
                     <ul class="breadcrumb-tree">
                         <li><a href="#">Inicio</a></li>
-                        <li class="active">Registro</li>
+                        <li class="active">PEDIDOS</li>
                     </ul>
                 </div>
             </div>
@@ -53,20 +53,50 @@
         <!-- /container -->
     </div>
     <!-- /BREADCRUMB -->
-    <!-- SECTION -->
-    <div class="login-page">
-        <svg xmlns="http://www.w3.org/2000/svg" height="6.0em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#4f1f61}</style><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
 
-        <div class="form">
-          <form class="register-form">
-            <input class="input-field " type="text" placeholder="Nome"/>
-            <input class="input-field" type="password" placeholder="Senha"/>
-            <input class="input-field" type="text" placeholder="E-mail"/>
-            <button class="create-button primary-btn">Registrar</button>
-            <p class="message">Já Registrado? <a href="#" class="toggle-form">Logar</a></p>
-          </form>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title">Meus Pedidos</h3>
+                    </div>
+                    <div class="order-summary">
+                        
+                      <div class="cart-item">
+                        <img src="/res/template/img/product01.png" alt="Product Image">
+                        <div class="product-description">
+                            <p>Notebook para Jogos super Rápido</p>
+                        </div>
+                        <div class="quantity">
+                            <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                            <input type="text" class="quantity-input" value="1">
+                            <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                        </div>
+                        <div class="price" style="display: none;">
+                            R$2000,00
+                        </div>
+                        <div class="total-price">
+                            R$<span class="result-price">2000,00</span>
+                        </div>
+                        <button class="remove-btn" onclick="removeCartItem(this)"><i class="bi bi-trash-fill"></i></button>
+                      </div>
+                      <div class="total-price">
+                        R$2000,00
+                      </div>
+                    </div>
+                </div>
+              
+              <div class="order-col">
+                  <div>.</div>
+              </div>
+              <div class="order-col">
+                  <div class="container-botoes">
+                    <a href="/" class="primary-btn order-submit ">Continuar Comprando</a>
+                  </div>
+            </div>
         </div>
-      </div>
+    </div>
       
 
     {include="footer"}
