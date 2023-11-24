@@ -83,14 +83,31 @@ class Cart extends Model
             $conn = new Sql();
 
             $sql = "
-                SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho
+                SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho,
+                       prdc.carprd_codigo
                 FROM produtos prd
-                INNER JOIN produtos_carrinho prdc ON prdc.prd_codigo = prd.prd_codigo
+                INNER JOIN produtos_carrinho prdc ON prdc.prd_codigo = prd.prd_codigo 
+                INNER JOIN carrinhos car ON prdc.car_codigo = car.car_codigo
+                WHERE car.user_codigo = :user_codigo
             ";
 
-            return $conn->select($sql);
+            return $conn->select($sql, array(":user_codigo" => $_SESSION['user']['user_codigo']));
 
         }
+
+    }
+
+    public static function remove($carprd_codigo)
+    {
+
+        $conn = new Sql();
+
+        $sql = "
+            DELETE FROM produtos_carrinho
+            WHERE carprd_codigo = :carprd_codigo
+        ";
+
+        $conn->query($sql, array(":carprd_codigo" => $carprd_codigo));
 
     }
 

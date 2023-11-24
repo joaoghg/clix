@@ -71,28 +71,18 @@
                       <h3 class="title">Itens</h3>
                   </div>
                   <div class="order-summary">
-                      
-                    <div class="cart-item">
-                      <img src="/res/template/img/product01.png" alt="Product Image">
-                      <div class="product-description">
-                          <p>Notebook para Jogos super Rápido</p>
-                      </div>
-                      <div class="quantity">
-                          <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
-                          <input type="text" class="quantity-input" value="1">
-                          <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
-                      </div>
-                      <div class="price" style="display: none;">
-                          R$2000,00
-                      </div>
-                      <div class="total-price">
-                          R$<span class="result-price">2000,00</span>
-                      </div>
-                      <button class="remove-btn" onclick="removeCartItem(this)"><i class="bi bi-trash-fill"></i></button>
-                    </div>
-                    <div class="total-price">
-                      R$2000,00
-                    </div>
+                        {loop="$produtos"}
+                            <div class="cart-item">
+                              <img src="{$value.img_caminho}" alt="Product Image">
+                              <div class="product-description">
+                                  <p>{$value.prd_descricao}</p>
+                              </div>
+                              <div class="price" style="display: none;">
+                                  R$ {function="number_format($product.prd_preco, 2, ',', '.')"}
+                              </div>
+                              <button class="remove-btn" onclick="removeCart({$value.carprd_codigo})"><i class="bi bi-trash-fill"></i></button>
+                            </div>
+                        {/loop}
                   </div>
               </div>
             
@@ -101,8 +91,6 @@
                 <div class="text-success"><strong>GRÁTIS</strong></div>
             </div>
             <div class="order-col">
-                <div><strong>TOTAL</strong></div>
-                <div><strong class="order-total total-price">R$2000,00</strong></div>
                 <div class="container-botoes">
                     <a href="/" class="primary-btn order-submit mr-2 btn_voltar_comprar">Continuar Comprando</a>
                     <a href="/pagamento" class="primary-btn order-submit ">Ir para pagamento</a>

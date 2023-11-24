@@ -397,3 +397,29 @@ async function addCart(prd_codigo){
 
     await fetch(url, options)
 }
+
+async function removeCart(carprd_codigo){
+    const url = '/removeCart'
+
+    const data = {
+        carprd_codigo : carprd_codigo
+    }
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    const response = await fetch(url, options)
+
+    if(response.ok){
+        window.open('/cart', '_self')
+    }
+    else{
+        const erro = await response.json()
+        alert(erro.msg)
+    }
+}

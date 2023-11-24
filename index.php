@@ -218,7 +218,9 @@ $app->get('/cart', function() {
 
     $page = new Page();
 
-    $page->setTpl("cart");
+    $produtos = Cart::get();
+
+    $page->setTpl("cart", array("produtos" => $produtos));
 });
 
 $app->get('/admin/categorias', function (){
@@ -655,6 +657,28 @@ $app->get('/getCart', function() {
 
         http_response_code(201);
         $retorno['produtos'] = $produtos;
+        $retorno['status'] = true;
+    }catch(\Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
+});
+
+$app->post('/removeCart', function (){
+
+    try{
+
+        User::verifyLoginUser();
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        Cart::remove($data['carprd_codigo']);
+
+        http_response_code(201);
         $retorno['status'] = true;
     }catch(\Exception $erro){
         http_response_code(400);
