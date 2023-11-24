@@ -120,7 +120,8 @@ class Products extends Model
         $conn = new Sql();
 
         $sql = "
-            SELECT prd.*, GROUP_CONCAT(cat.cat_descricao) AS categorias, GROUP_CONCAT(catp.cat_codigo) AS cat_codigos
+            SELECT prd.*, GROUP_CONCAT(cat.cat_descricao) AS categorias, GROUP_CONCAT(catp.cat_codigo) AS cat_codigos,
+                   (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho
             FROM produtos prd
             INNER JOIN produto_categoria catp ON prd.prd_codigo = catp.prd_codigo
             INNER JOIN categorias cat ON catp.cat_codigo = cat.cat_codigo

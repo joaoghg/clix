@@ -549,4 +549,22 @@ $app->post('/store', function(){
 
 });
 
+$app->get('/products/{prd_codigo}', function(Request $request, Response $response, array $args){
+
+    try{
+
+        $produto = Products::get($args['prd_codigo']);
+
+        $retorno['produto'] = $produto;
+        http_response_code(200);
+    }catch(Exception $erro){
+        http_response_code(400);
+        $retorno['status'] = false;
+        $retorno['msg'] = $erro->getMessage();
+    }
+    header("Content-Type: application/json");
+    exit(json_encode($retorno));
+
+});
+
 $app->run();

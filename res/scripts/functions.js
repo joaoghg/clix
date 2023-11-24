@@ -242,3 +242,54 @@ function countWishlist(){
     document.querySelector('#qtd_wishlist').innerHTML = Object.keys(produtos).length
 
 }
+
+async function carregarProdutosWishlist(){
+
+    let produtos = JSON.parse(localStorage.getItem('wishlist')) || {}
+
+    let html = ''
+    let totalWishlist = 0
+    for (const key of Object.keys(produtos)) {
+
+        const response = await fetch(`/products/${produtos[key]}`)
+
+        const data = await response.json()
+
+        const prd = data.produto
+
+        html += `
+            <div class="cart-item">
+              <img src="${prd.img_caminho}" alt="Product Image">
+              <div class="product-description">
+                  <p>${prd.prd_descricao}</p>
+              </div>
+             
+              <div class="total-price">
+                  R$<span class="result-price">${prd.prd_preco.replace('.', ',')}</span>
+              </div>
+              <button title="Adicionar ao Carrinho" class="cart-btn_wishlist" onclick="addCart(${prd.prd_codigo})"><i class="bi bi-cart-fill"></i></button>
+              <button title="Excluir dos Favoritos" class="remove-btn" onclick="removerWishlist(${prd.prd_codigo})"><i class="bi bi-trash-fill"></i></button>
+            </div>
+        `
+
+        totalWishlist += parseFloat(prd.prd_preco)
+
+    }
+
+    document.querySelector('#div_itens_wishlist').innerHTML = html
+    document.querySelector('#preco_total_wishlist').textContent = String(totalWishlist).replace('.', ',')
+
+}
+
+function removerWishlist(prd_codigo){
+
+    let produtos = JSON.parse(localStorage.getItem('wishlist')) || {}
+
+    delete produtos[prd_codigo]
+
+    localStorage.setItem('wishlist', JSON.stringify(produtos))
+
+    countWishlist()
+    carregarProdutosWishlist()
+
+}

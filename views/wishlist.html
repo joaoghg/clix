@@ -66,45 +66,24 @@
                   <div class="section-title text-center">
                       <h3 class="title">Favoritos</h3>
                   </div>
-                  <div class="order-summary">
-                      
-                    <div class="cart-item">
-                      <img src="/res/template/img/product01.png" alt="Product Image">
-                      <div class="product-description">
-                          <p>Notebook para Jogos super Rápido</p>
-                      </div>
-                     
-                      <div class="price" style="display: none;">
-                          R$2000,00
-                      </div>
-                      <div class="total-price">
-                          R$<span class="result-price">2000,00</span>
-                      </div>
-                      <button title="Adicionar ao Carrinho" class="cart-btn_wishlist" onclick="removeCartItem(this)"><i class="bi bi-cart-fill"></i></button>
-                      <button title="Excluir dos Favoritos" class="remove-btn" onclick="removeCartItem(this)"><i class="bi bi-trash-fill"></i></button>
+                  <div class="order-summary" id="div_itens_wishlist">
+
+
                   </div>
-                  <div class="total-price">
-                    R$2000,00
-                </div>
-            </div>
+              </div>
             
         
             <div class="order-col">
                 <div><strong>TOTAL</strong></div>
-                <div><strong class="order-total total-price">R$2000,00</strong></div>
+                <div><strong class="order-total total-price" id="preco_total_wishlist"></strong></div>
                 <div class="container-botoes">
                     <a href="/" class="primary-btn order-submit mr-2 btn_voltar_comprar">Continuar Comprando</a>
-                   
                 </div>
+            </div>
           </div>
       </div>
-  </div>
-
-</body>
-</html>
-
-   
     </div>
+
     {include="footer"}
 
     <!-- jQuery Plugins -->
@@ -116,67 +95,8 @@
     <script src="/res/template/js/main.js"></script>
     <script src="/res/scripts/functions.js"></script>
 
+    <script>carregarProdutosWishlist()</script>
 
-    <script>
-      function decreaseQuantity(button) {
-    var input = button.nextElementSibling;
-    var currentValue = parseInt(input.value, 10);
-
-    if (currentValue > 1) {
-        input.value = currentValue - 1;
-    }
-}
-    function increaseQuantity(button) {
-        var input = button.previousElementSibling;
-        var currentValue = parseInt(input.value, 10);
-
-        input.value = currentValue + 1;
-    }
-    function decreaseQuantity(button) {
-    var input = button.nextElementSibling;
-    var quantity = parseInt(input.value, 10);
-
-    if (quantity > 1) {
-        input.value = quantity - 1;
-        updateTotalPrice(button.closest('.cart-item'));
-    }
-}
-
-// Função para aumentar a quantidade
-function increaseQuantity(button) {
-    var input = button.previousElementSibling;
-    var quantity = parseInt(input.value, 10);
-
-    input.value = quantity + 1;
-    updateTotalPrice(button.closest('.cart-item'));
-}
-
-// Função para atualizar o preço total do item
-function updateTotalPrice(cartItem) {
-    var quantity = parseInt(cartItem.querySelector('.quantity-input').value, 10);
-    var pricePerUnit = parseFloat(cartItem.querySelector('.price').innerText.replace('R$', '').replace(',', '.'));
-
-    var totalPrice = quantity * pricePerUnit;
-    cartItem.querySelector('.total-price').innerText = 'R$' + totalPrice.toFixed(2);
-
-    updateOrderTotal(); 
-}
-
-// Função para atualizar o preço total do pedido
-function updateOrderTotal() {
-    var totalPrice = 0;
-    var cartItems = document.querySelectorAll('.cart-item');
-
-    cartItems.forEach(function(cartItem) {
-        var quantity = parseInt(cartItem.querySelector('.quantity-input').value, 10);
-        var pricePerUnit = parseFloat(cartItem.querySelector('.price').innerText.replace('R$', '').replace(',', '.'));
-
-        totalPrice += quantity * pricePerUnit;
-    });
-
-    document.querySelector('.order-total').innerText = 'R$' + totalPrice.toFixed(2);
-}
-    </script>
 </body>
 
 </html>
