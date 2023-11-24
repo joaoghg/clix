@@ -10,14 +10,13 @@
     <title>CliX! - Login</title>
 
     <!-- Google font -->
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
-    
-    <link rel="stylesheet" href="/res/styles/estiloLogin.css">
 
     <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="/res/template/css/slick.css" />
     <link type="text/css" rel="stylesheet" href="/res/template/css/slick-theme.css" />
@@ -30,76 +29,77 @@
     <link rel="stylesheet" href="/res/template/css/font-awesome.min.css">
 
     <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/res/template/css/style.css" />
+    <link rel="stylesheet" href="/res/styles/estiloLogin.css">
+
+    <!-- Custom stlylesheet -->
 
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="content first-content">
-            <div class="first-column">
-                    <div class="header-logo">
-                        <a href="/" class="logo">
-                            <!--<img src="/res/template/img/logo.png" alt="">-->
-                            <h1 class="m-0">Cli<span class="logo-detail">X</span>!</h1>
-                        </a>
-                    </div>
-                <h2 class="title title-primary">Bem Vindo!</h2>
-                <p class="description description-primary">Já tem registro em nosso site? <br>Clique aqui!</p>
-                <button id="signin" class="btn btn-primary">Entrar</button>
-            </div>    
-            <div class="second-column">
-                <h2 class="title title-second">Criar Conta</h2>
-                <p class="description description-second">Primeira vez no site? Registre aqui!</p>
-                <form class="form">
-                    <label class="label-input" for="">
-                        <i class="far fa-user icon-modify"></i>
-                        <input type="text" placeholder="Nome"i required>
+    {include="header"}
+
+    <div id="main-container">
+        <div class="main-content first-content">
+            <div class="first-col">
+                <h2 class="main-title title-primary">Bem Vindo!</h2>
+                <p class="main-description description-primary">Já tem registro em nosso site? <br>Clique aqui!</p>
+                <button id="signin" class="btn-main btn-primary">Entrar</button>
+            </div>
+            <div class="second-col">
+                <h2 class="main-title title-second">Criar Conta</h2>
+                <p class="main-description description-second">Primeira vez no site? Registre aqui!</p>
+                <form class="main-form">
+                    <label class="label-input-main" for="">
+                        <i class="far fa-user icon-modify-main"></i>
+                        <input type="text" placeholder="Nome" required>
                     </label>
-                
-                    <label class="label-input" for="">
-                        <i class="far fa-envelope icon-modify"></i>
+
+                    <label class="label-input-main" for="">
+                        <i class="far fa-envelope icon-modify-main"></i>
                         <input type="email" placeholder="Email" required>
                     </label>
 
-                    <label class="label-input" for="">
-                        <i class="fas fa-lock icon-modify"></i>
+                    <label class="label-input-main" for="">
+                        <i class="fas fa-lock icon-modify-main"></i>
                         <input type="password" placeholder="Senha" required>
                     </label>
 
-                    <a href="/" class="btn btn-second">Registrar</a>
+                    <a href="/" class="btn-main btn-second">Registrar</a>
                 </form>
             </div><!-- second column -->
         </div><!-- first content -->
-        <div class="content second-content">
-            <div class="first-column">
-                <h2 class="title title-primary">Ola, Amigo!</h2>
-                <p class="description description-primary">Insira seus dados</p>
-                <p class="description description-primary">e começe uma jornada com a gente</p>
-                <button id="signup" class="btn btn-primary">Registrar</button>
+        <div class="main-content second-content">
+            <div class="first-col">
+                <h2 class="main-title title-primary">Ola, Amigo!</h2>
+                <p class="main-description description-primary">Insira seus dados</p>
+                <p class="main-description description-primary">e começe uma jornada com a gente</p>
+                <button id="signup" class="btn-main btn-primary">Registrar</button>
             </div>
-            <div class="second-column">
-                <h2 class="title title-second">Login</h2>
-                <p class="description description-second">Insira seu email e senha</p>
-                <form class="form">
-                
-                    <label class="label-input" for="">
-                        <i class="far fa-envelope icon-modify"></i>
+            <div class="second-col">
+                <h2 class="main-title title-second">Login</h2>
+                <p class="main-description description-second">Insira seu email e senha</p>
+                <form class="main-form">
+
+                    <label class="label-input-main" for="">
+                        <i class="far fa-envelope icon-modify-main"></i>
                         <input type="email" placeholder="Email" required>
                     </label>
-                
-                    <label class="label-input" for="">
-                        <i class="fas fa-lock icon-modify"></i>
+
+                    <label class="label-input-main" for="">
+                        <i class="fas fa-lock icon-modify-main"></i>
                         <input type="password" placeholder="Senha" required>
                     </label>
-                
-                    <a href="/" class="btn btn-second">Entrar</a>
+
+                    <a href="/" class="btn-main btn-second" onclick="loginAdmin()">Entrar</a>
                 </form>
             </div><!-- second column -->
         </div><!-- second-content -->
     </div>
-    
-    
+
+    {include="footer"}
+
 
 
 

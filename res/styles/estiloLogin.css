@@ -1,15 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Atualizado CSS com classes renomeadas */
 
-body {
-    font-family: 'Open Sans', sans-serif;
-    
-}
 
-.container {
+
+#main-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +10,7 @@ body {
     background-color: #ffffff; /* Purple background color */
 }
 
-.content {
+.main-content {
     background-color: #b482d6;
     border-radius: 15px;
     width: 960px;
@@ -27,7 +20,7 @@ body {
     position: relative;
 }
 
-.content::before {
+.main-content::before {
     content: "";
     position: absolute;
     background-color: #6c3483; /* Darker purple color */
@@ -38,7 +31,7 @@ body {
     left: 0;
 }
 
-.title {
+.main-title {
     font-size: 28px;
     font-weight: bold;
     text-transform: capitalize;
@@ -53,7 +46,7 @@ body {
     color: #6c3483; /* Darker purple color */
 }
 
-.description {
+.main-description {
     font-size: 14px;
     font-weight: 300;
     line-height: 30px;
@@ -68,7 +61,7 @@ body {
     color: #fff;
 }
 
-.btn {
+.btn-main {
     border-radius: 15px;
     text-transform: uppercase;
     color: #fff;
@@ -110,17 +103,17 @@ body {
     display: flex;
 }
 
-.first-content .second-column {
+.first-content .second-col {
     z-index: 11;
 }
 
-.first-column {
+.first-col {
     text-align: center;
     width: 40%;
     z-index: 10;
 }
 
-.second-column {
+.second-col {
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -160,13 +153,13 @@ body {
     color: #95a5a6;
 }
 
-.form {
+.main-form {
     display: flex;
     flex-direction: column;
     width: 55%;
 }
 
-.form input {
+.main-form input {
     height: 45px;
     width: 100%;
     border: none;
@@ -178,31 +171,31 @@ input:-webkit-autofill {
     -webkit-text-fill-color: #000 !important;
 }
 
-.label-input {
+.label-input-main {
     background-color: #ffffff; /* Purple background color */
     display: flex;
     align-items: center;
     margin: 8px;
 }
 
-.icon-modify {
+.icon-modify-main {
     color: #1b858d; /* Adjusted color, not purple */
     padding: 0 5px;
 }
 
-/* second content*/
+/* Second content */
 
 .second-content {
     position: absolute;
     display: flex;
 }
 
-.second-content .first-column {
+.second-content .first-col {
     order: 2;
     z-index: -1;
 }
 
-.second-content .second-column {
+.second-content .second-col {
     order: 1;
     z-index: -1;
 }
@@ -218,19 +211,19 @@ input:-webkit-autofill {
     text-transform: capitalize;
 }
 
-.sign-in-js .first-content .first-column {
+.sign-in-js .first-content .first-col {
     z-index: -1;
 }
 
-.sign-in-js .second-content .second-column {
+.sign-in-js .second-content .second-col {
     z-index: 11;
 }
 
-.sign-in-js .second-content .first-column {
+.sign-in-js .second-content .first-col {
     z-index: 13;
 }
 
-.sign-in-js .content::before {
+.sign-in-js .main-content::before {
     left: 60%;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -240,62 +233,62 @@ input:-webkit-autofill {
     z-index: 12;
 }
 
-.sign-up-js .content::before {
+.sign-up-js .main-content::before {
     animation: slideout 1.3s;
     z-index: 12;
 }
 
-.sign-up-js .second-content .first-column,
-.sign-up-js .second-content .second-column {
+.sign-up-js .second-content .first-col,
+.sign-up-js .second-content .second-col {
     z-index: -1;
 }
 
-.sign-up-js .first-content .second-column {
+.sign-up-js .first-content .second-col {
     z-index: 11;
 }
 
-.sign-up-js .first-content .first-column {
+.sign-up-js .first-content .first-col {
     z-index: 13;
 }
 
-.sign-in-js .first-content .second-column {
+.sign-in-js .first-content .second-col {
     z-index: -1;
     position: relative;
     animation: deslocamentoEsq 1.3s;
 }
 
-.sign-up-js .second-content .second-column {
+.sign-up-js .second-content .second-col {
     position: relative;
     z-index: -1;
     animation: deslocamentoDir 1.3s;
 }
 
-
 #header {
     padding-top: 15px;
     padding-bottom: 15px;
     background-color: #15161D;
-  }
+}
 
-  .header-logo {
+.header-logo-main {
     justify-items: start;
-  }
-  .header-logo h1{
-      color: #FFFFFF;
-  }
-  
-  .logo-detail{
-      color: var(--primary);
-  }
-  
-  .header-logo h1::after{
-      content: '';
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: var(--primary);
-  }
-  
-  .header-logo .logo img {
+}
+
+.header-logo-main h1 {
+    color: #FFFFFF;
+}
+
+.logo-detail-main {
+    color: var(--primary);
+}
+
+.header-logo-main h1::after {
+    content: '';
     display: block;
-  }
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.header-logo-main .logo img {
+    display: block;
+}
