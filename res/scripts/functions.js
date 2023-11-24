@@ -293,8 +293,6 @@ function removerWishlist(prd_codigo){
     carregarProdutosWishlist()
 
 }
-<<<<<<< HEAD
-=======
 
 async function loginUser(){
     const login = document.querySelector('#user_login').value
@@ -399,4 +397,3 @@ async function addCart(prd_codigo){
 
     await fetch(url, options)
 }
->>>>>>> ffbe0ad00a15249e2d543d2bf21bc2d16ae360b1
