@@ -291,6 +291,8 @@ ADD prd_obs TEXT NOT NULL;
 insert into pessoas (ps_nome, ps_email, ps_contato) values ('admin', 'admin@gmail.com', '1440028922');
 insert into usuarios(ps_codigo, user_login, user_senha, user_admin) values (1, 'admin', '$2y$12$N8hBTDJAc33fostLXYYrC.r1bMjjGWRS7urjAQA.V0ozP71wTyRK6', 1);
 
+insert into pedido_status(pedst_descricao) values ('Pedido gerado');
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
