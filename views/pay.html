@@ -99,7 +99,7 @@
                                         pedido.
                                     </p>
 
-                                    <a href="#" class="primary-btn avancar">PAGAR</a>
+                                    <a href="/" class="primary-btn avancar" id="pagarBtn" onclick="pagarClicado(event)">PAGAR</a>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                                         pedido perderá automaticamente a validade.
                                     </p>
 
-                                    <a href="#" class="primary-btn  avancar">PAGAR</a>
+                                    <a href="/" class="primary-btn avancar" id="pagarBtn" onclick="pagarClicado(event)">PAGAR</a>
 
                                 </div>
                             </div>
@@ -167,14 +167,14 @@
                                             <label>Validade</label>
                                         </div>
                                         <div class="group">
-                                            <input required="" type="text" class="input1" id="cmp_checkout_rua">
+                                            <input required="" type="text" class="input1" id="cmp_checkout_rua" maxlength="3">
                                             <span class="highlight"></span>
                                             <span class="bar"></span>
                                             <label>CVV</label>
                                         </div>
 
                                         <div class="group">
-                                            <input required="" type="text" class="input1" id="cmp_checkout_rua">
+                                            <input required="" type="text" class="input1" id="cmp_checkout_rua" maxlength="11">
                                             <span class="highlight"></span>
                                             <span class="bar"></span>
                                             <label>CPF/CNPJ do Titular</label>
@@ -204,7 +204,7 @@
                                         
                                 </div>
                                 <div style="display: flex; justify-content: center;">
-                                  <a href="#" class="primary-btn avancar" style="align-self: center; margin-left: auto; margin-right: auto;">PAGAR</a>
+                                  <a href="/" id="pagarBtn" class="primary-btn avancar" style="align-self: center; margin-left: auto; margin-right: auto;" onclick="pagarClicado(event)">PAGAR</a>
 
                                 </div>
 
@@ -236,6 +236,19 @@
 
 <script>
 
+function pagarClicado(event) {
+        // Prevenir o comportamento padrão do link (evitar redirecionamento imediato)
+        event.preventDefault();
+
+        // Exibir um alerta
+        alert('Pagamento efetuado com sucesso!');
+
+        // Adicionar um evento de clique ao alerta
+        window.addEventListener('click', function () {
+            // Redirecionar para a página X
+            window.location.href = '/';
+        });
+    }
 </script>
 </body>
 
