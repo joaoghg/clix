@@ -402,4 +402,26 @@ class Products extends Model
 
     }
 
+    public static function getByDescricao($prd_descricao)
+    {
+
+        $conn = new Sql();
+
+        $sql = "
+            SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho,
+                    (SELECT cat_descricao 
+                     FROM categorias cat2
+                     INNER JOIN produto_categoria catp ON cat2.cat_codigo = catp.cat_codigo
+                     WHERE catp.prd_codigo = prd.prd_codigo
+                     LIMIT 1) prd_categoria
+            FROM produtos prd
+            INNER JOIN produto_categoria cat ON prd.prd_codigo = cat.prd_codigo
+            WHERE prd.prd_descricao LIKE '$prd_descricao%'
+            GROUP BY prd.prd_codigo
+        ";
+
+        return $conn->select($sql);
+
+    }
+
 }

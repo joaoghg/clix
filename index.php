@@ -567,4 +567,16 @@ $app->get('/products/{prd_codigo}', function(Request $request, Response $respons
 
 });
 
+$app->post('/store/buscar', function(){
+
+    $produtos = Products::getByDescricao($_POST['filtro']);
+
+    $categorias = Categoria::listAll();
+
+    $page = new Page();
+
+    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias));
+
+});
+
 $app->run();

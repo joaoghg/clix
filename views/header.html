@@ -17,10 +17,12 @@
 
                 <!-- SEARCH BAR -->
                 <div class="col-sm-6 col-xs-7 header-responsive">
-                    <div class="header-search" style="display: flex">
-                        <input class="input input-left-round" placeholder="Procure">
-                        <button class="search-btn">Buscar</button>
-                    </div>
+                    <form action="/store/buscar" method="post">
+                        <div class="header-search" style="display: flex">
+                            <input class="input input-left-round" name="filtro" placeholder="Procure">
+                            <button class="search-btn">Buscar</button>
+                        </div>
+                    </form>
                 </div>
                 <!-- /SEARCH BAR -->
 
