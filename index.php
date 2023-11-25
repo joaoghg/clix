@@ -173,9 +173,11 @@ $app->post('/admin/users/update', function (){
 
 $app->get('/checkout', function() {
 
+    $produtos = Cart::get();
+
     $page = new Page();
 
-    $page->setTpl("checkout");
+    $page->setTpl("checkout", array("produtos" => $produtos, "user" => $_SESSION['user']));
 });
 
 $app->get('/blank', function() {
@@ -189,7 +191,7 @@ $app->get('/pagamento', function() {
 
     $page = new Page();
 
-    $page->setTpl("pay");
+    $page->setTpl("pay", array("user" => $_SESSION['user']));
 });
 
 $app->get('/product/{prd_codigo}', function(Request $request, Response $response, array $args) {
@@ -204,14 +206,14 @@ $app->get('/product/{prd_codigo}', function(Request $request, Response $response
 
     $relateds = Products::getByCategorias($product['cat_codigos'], $args['prd_codigo']);
 
-    $page->setTpl("product", array("product" => $product, "images" => $images, "categorias" => $categorias, "relateds" => $relateds));
+    $page->setTpl("product", array("product" => $product, "images" => $images, "categorias" => $categorias, "relateds" => $relateds, "user" => $_SESSION['user']));
 });
 
 $app->get('/wishlist', function() {
 
     $page = new Page();
 
-    $page->setTpl("wishlist");
+    $page->setTpl("wishlist", array("user" => $_SESSION['user']));
 });
 
 $app->get('/cart', function() {
@@ -220,7 +222,7 @@ $app->get('/cart', function() {
 
     $produtos = Cart::get();
 
-    $page->setTpl("cart", array("produtos" => $produtos));
+    $page->setTpl("cart", array("produtos" => $produtos, "user" => $_SESSION['user']));
 });
 
 $app->get('/admin/categorias', function (){
@@ -522,7 +524,7 @@ $app->get('/store[/{categoria}]', function (Request $request, Response $response
     
     $page = new Page();
 
-    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias, "filtro" => $args['categoria']));
+    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias, "filtro" => $args['categoria'], "user" => $_SESSION['user']));
 
 });
 
@@ -576,7 +578,7 @@ $app->post('/store/buscar', function(){
 
     $page = new Page();
 
-    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias));
+    $page->setTpl("store", array("produtos" => $produtos, "categorias" => $categorias, "user" => $_SESSION['user']));
 
 });
 

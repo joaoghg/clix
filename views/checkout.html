@@ -168,9 +168,9 @@
                     <!-- /Shiping Details -->
 
                     <!-- Order notes -->
-                    <div class="order-notes">
+                    <!--<div class="order-notes">
                         <textarea class="input" placeholder="Detalhes adicionais"></textarea>
-                    </div>
+                    </div>-->
                     <!-- /Order notes -->
                 </div>
 
@@ -185,14 +185,12 @@
                             <div><strong>TOTAL</strong></div>
                         </div>
                         <div class="order-products">
-                            <div class="order-col">
-                                <div>1x Product Name Goes Here</div>
-                                <div>R$205,00</div>
-                            </div>
-                            <div class="order-col">
-                                <div>2x Product Name Goes Here</div>
-                                <div>R$205,00</div>
-                            </div>
+                            {loop="$produtos"}
+                                <div class="order-col">
+                                    <div>{$value.prd_descricao}</div>
+                                    <div>R$ {function="number_format($value.prd_preco, 2, ',', '.')"}</div>
+                                </div>
+                            {/loop}
                         </div>
                         <div class="order-col">
                             <div>Frete</div>
@@ -200,7 +198,7 @@
                         </div>
                         <div class="order-col">
                             <div><strong>TOTAL</strong></div>
-                            <div><strong class="order-total">R$410,00</strong></div>
+                            <div><strong class="order-total">R$ {function="number_format($produtos.0.preco_total, 2, ',', '.')"}</strong></div>
                         </div>
 
                     </div>

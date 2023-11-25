@@ -14,9 +14,10 @@ class Cart extends Model
         $conn = new Sql();
 
         $sql = "
-            SELECT car_codigo
-            FROM carrinhos 
+            SELECT car.car_codigo
+            FROM carrinhos car
             WHERE user_codigo = :user_codigo
+            AND (SELECT COUNT(*) FROM pedidos WHERE car_codigo = car.car_codigo) = 0
         ";
 
         $response =  $conn->select($sql, array(':user_codigo' => $_SESSION['user']['user_codigo']));
@@ -84,7 +85,10 @@ class Cart extends Model
 
             $sql = "
                 SELECT prd.*, (SELECT img_caminho FROM produto_imagens WHERE prd_codigo = prd.prd_codigo LIMIT 1) img_caminho,
-                       prdc.carprd_codigo
+                       prdc.carprd_codigo, (SELECT SUM(prd_preco) 
+                                            FROM produtos prd
+                                            INNER JOIN produtos_carrinho carprd ON prd.prd_codigo = carprd.prd_codigo
+                                            WHERE car_codigo = car.car_codigo) preco_total
                 FROM produtos prd
                 INNER JOIN produtos_carrinho prdc ON prdc.prd_codigo = prd.prd_codigo 
                 INNER JOIN carrinhos car ON prdc.car_codigo = car.car_codigo
